@@ -6,7 +6,7 @@ class payAPI
     protected string $privateKey;
     protected bool $debugService;
     protected ?string $environment = null;
-    protected string $serviceUrl = 'http://localhost:807/service/rest/Pay.svc'; //https://premium.black/service/rest/Pay.svc
+    protected string $serviceUrl = 'https://premium.black/service/rest/Pay.svc';
 
     public function __construct(bool $debugService = false)
     {
