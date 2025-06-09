@@ -30,9 +30,6 @@ function premium_black_handle_webhook(WP_REST_Request $request)
     // Gateway-Instanz holen
     $gateway = function_exists('wc_gateway_premium_black_instance') ? wc_gateway_premium_black_instance() : new WC_Gateway_Premium_Black();
 
-    // Logging für Debug-Zwecke
-    error_log("Premium Black Webhook: action={$status}, tx={$transactionId}");
-
     // Bestellung anhand Transaction ID finden
     $orders = wc_get_orders([
         'transactionId' => $transactionId,
@@ -82,15 +79,15 @@ function premium_black_handle_webhook(WP_REST_Request $request)
 
         case 'confirmed':
             $order->payment_complete($transactionId);
-            $order->add_order_note(__('Payment was confirmed by Premium Black.', 'wc-gateway-premium-black'));
+            $order->add_order_note(__('Payment was confirmed by Premium Black.', 'woocommerce-gateway-premium-black'));
             break;
 
         case 'canceled':
-            $order->update_status('cancelled', __('The transaction was cancelled.', 'wc-gateway-premium-black'));
+            $order->update_status('cancelled', __('The transaction was cancelled.', 'woocommerce-gateway-premium-black'));
             break;
 
         case 'timeout':
-            $order->update_status('cancelled', __('The transaction timed out.', 'wc-gateway-premium-black'));
+            $order->update_status('cancelled', __('The transaction timed out.', 'woocommerce-gateway-premium-black'));
             break;
 
         default:

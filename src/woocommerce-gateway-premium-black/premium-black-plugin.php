@@ -1,13 +1,15 @@
 <?php
 /**
- * Plugin Name: Premium Black Payment for Woocommerce
+ * Plugin Name:  Premium Black Payment for WooCommerce
  * Plugin URI: https://github.com/PREMIUM-BLACK/woocommerce-premium-black
  * Author Name: Premium Black Ltd.
  * Author URI: https://premium.black
  * Description: This plugin allows you to offer crypto currency payments with Premium Black.
  * Version: 1.1.0
- * Text Domain: wc-gateway-premium-black
+ * Text Domain: woocommerce-gateway-premium-black
  * Domain Path: /languages
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Requires Plugins: woocommerce
  * WooCommerce tested up to: 9.8.0
@@ -33,7 +35,7 @@ add_filter('woocommerce_payment_gateways', function($gateways) {
 // Plugin-Links
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
     $plugin_links = [
-        '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings') . '</a>',
+        '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings', 'woocommerce-gateway-premium-black') . '</a>',
         '<a href="https://github.com/PREMIUM-BLACK/woocommerce-premium-black" target="_blank">GitHub</a>',
         '<a href="https://premium.black" target="_blank">Website</a>',
     ];
@@ -100,9 +102,9 @@ function premium_black_admin_notice()
     ?>
     <div class="notice notice-warning is-dismissible" style="display: flex; align-items: center; gap: 12px;">
         <img src="<?php echo esc_url($image_url); ?>" style="width:32px; height:32px;" alt="Premium Black" />
-        <?php _e('Premium Black is almost ready. To get started, fill in your API credentials to finish the installation.', 'wc-gateway-premium-black'); ?>
+        <?php esc_html(__('Premium Black is almost ready. To get started, fill in your API credentials to finish the installation.', 'woocommerce-gateway-premium-black')); ?>
         <a href="<?php echo esc_url(admin_url('admin.php?page=premium-black-onboarding')); ?>">
-            <?php _e('Finish onboarding', 'wc-gateway-premium-black'); ?>
+            <?php esc_html(__('Finish onboarding', 'woocommerce-gateway-premium-black')); ?>
         </a>
     </div>
     <?php

@@ -105,7 +105,7 @@ function wc_gateway_premium_black_init()
             $this->icon = apply_filters('woocommerce_premium_black_icon', plugins_url('assets/premiumblack.png', __FILE__)); //esc_url($this->module_url) .
             $this->has_fields = false;
             $this->method_title = 'Premium Black';
-            $this->method_description = __('Offers payments with crypto via Premium Black.', 'wc-gateway-premium-black');
+            $this->method_description = __('Offers payments with crypto via Premium Black.', 'woocommerce-gateway-premium-black');
         }
 
 
@@ -124,14 +124,14 @@ function wc_gateway_premium_black_init()
         public function payment_fields()
         {
             if ($description = $this->get_description()) {
-                echo wpautop(wptexturize($description));
+                echo esc_html(wpautop(wptexturize($description)));
             }
 
             $option_keys = array_keys($this->availableCryptos);
 
             woocommerce_form_field('transaction_currency', [
                 'type' => 'radio',
-                // 'label' => __('Cryptocurrency', 'wc-gateway-premium-black'),
+                // 'label' => __('Cryptocurrency', 'woocommerce-gateway-premium-black'),
                 'options' => $this->availableCryptos,
                 'required' => true,
             ], reset($option_keys));
@@ -145,16 +145,25 @@ function wc_gateway_premium_black_init()
         {
             $orderUrl = $order->get_checkout_order_received_url();
 
-            $subject = sprintf(__('Payment for order #%s insufficient', 'wc-gateway-premium-black'), $order->get_order_number());
-
-            $message = '<p>' . sprintf(__('We received <strong>%s</strong> of <strong>%s</strong>.', 'wc-gateway-premium-black'), $receivedAmount, $amount) . '</p>';
-            $message .= '<p>' . __('Please sent the missing amount.', 'wc-gateway-premium-black') . '</p>';
-            $message .= "<a class='button' href='$orderUrl'>" . __('Click here to see the payment details again.', 'wc-gateway-premium-black') . '</a>';
+            // Nachher:
+            $subject = sprintf(
+                /* translators: %s: Order number */
+                __('Payment for order #%s insufficient', 'woocommerce-gateway-premium-black'),
+                $order->get_order_number()
+            );
+            $message = '<p>' . sprintf(
+                /* translators: 1: received amount, 2: expected amount */
+                __('We received <strong>%1$s</strong> of <strong>%2$s</strong>.', 'woocommerce-gateway-premium-black'),
+                $receivedAmount,
+                $amount
+            ) . '</p>';
+            $message .= '<p>' . __('Please sent the missing amount.', 'woocommerce-gateway-premium-black') . '</p>';
+            $message .= "<a class='button' href='$orderUrl'>" . __('Click here to see the payment details again.', 'woocommerce-gateway-premium-black') . '</a>';
 
             $this->send_ipn_email_notification($order, $subject, $message);
 
             // Order Status auf "on-hold" setzen
-            $order->update_status('on-hold', __('Payment insufficient - waiting for remaining balance.', 'wc-gateway-premium-black'));
+            $order->update_status('on-hold', __('Payment insufficient - waiting for remaining balance.', 'woocommerce-gateway-premium-black'));
         }
 
         /**
@@ -162,16 +171,22 @@ function wc_gateway_premium_black_init()
          */
         private function handle_waiting_for_confirmation($order)
         {
-            $subject = sprintf(__('Waiting for transaction confirmation of order #%s', 'wc-gateway-premium-black'), $order->get_order_number());
+            // Zeile 165–167: Fehlende "translators:"-Kommentare
+            $subject = sprintf(
+                /* translators: %s: Order id */
+                __('Waiting for transaction confirmation of order #%s', 'woocommerce-gateway-premium-black'),
+                $order->get_order_number()
+            );
 
-            $message = '<p>' . sprintf(__('Thank you for submitting your payment for order #%s.', 'wc-gateway-premium-black'), $order->get_order_number()) . '</p>';
-            $message .= '<p>' . __('Your transaction has been registered now and is being verified.', 'wc-gateway-premium-black') . '</p>';
-            $message .= '<p>' . __('We will notify you after the completion.', 'wc-gateway-premium-black') . '</p>';
+            // translators: %s: Order id
+            $message = '<p>' . sprintf(__('Thank you for submitting your payment for order #%s.', 'woocommerce-gateway-premium-black'), $order->get_order_number()) . '</p>';
+            $message .= '<p>' . __('Your transaction has been registered now and is being verified.', 'woocommerce-gateway-premium-black') . '</p>';
+            $message .= '<p>' . __('We will notify you after the completion.', 'woocommerce-gateway-premium-black') . '</p>';
 
             $this->send_ipn_email_notification($order, $subject, $message);
 
             // Order Status auf "pending" setzen
-            $order->update_status('pending', __('Payment submitted - waiting for blockchain confirmation.', 'wc-gateway-premium-black'));
+            $order->update_status('pending', __('Payment submitted - waiting for blockchain confirmation.', 'woocommerce-gateway-premium-black'));
         }
 
         /**
@@ -198,7 +213,7 @@ function wc_gateway_premium_black_init()
                 ];
             }
 
-            $currency = isset($_POST['transaction_currency']) ? esc_attr($_POST['transaction_currency']) : '';
+            $currency = isset($_POST['transaction_currency']) ? esc_attr(sanitize_text_field(wp_unslash($_POST['transaction_currency']))) : '';
             if ($currency) {
                 $order->update_meta_data('_transaction_currency', $currency);
             }
@@ -220,7 +235,7 @@ function wc_gateway_premium_black_init()
             $order->update_meta_data('_transaction_key', $response->TransactionKey);
 
             if ($order->get_total() > 0) {
-                $order->update_status('on-hold', __('Awaiting crypto transaction', 'wc-gateway-premium-black'));
+                $order->update_status('on-hold', __('Awaiting crypto transaction', 'woocommerce-gateway-premium-black'));
             } else {
                 $order->payment_complete();
             }
@@ -282,7 +297,7 @@ function wc_gateway_premium_black_init()
             }
 
             if ($response->Error != null) {
-                throw new Exception($response->Error);
+                throw new Exception(esc_html($response->Error));
             }
 
             if (!$this->api->checkHash($response)) {
@@ -328,7 +343,7 @@ function wc_gateway_premium_black_init()
                 $order->set_transaction_id(null);
                 $order->delete_meta_data('_transaction_key');
 
-                echo '<p class="status-message">' . __('The payment details could not be loaded. Please try reloading the page.', 'wc-gateway-premium-black') . '</p>';
+                echo '<p class="status-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'woocommerce-gateway-premium-black')) . '</p>';
 
                 return;
             }
@@ -342,16 +357,16 @@ function wc_gateway_premium_black_init()
 
             echo '<div class="wc-gateway-premium-black">';
 
-            echo '<h2 class="status-heading">' . __('Status', 'wc-gateway-premium-black') . '</h2>';
+            echo '<h2 class="status-heading">' . esc_html(__('Status', 'woocommerce-gateway-premium-black')) . '</h2>';
 
             if ($response === null || $response->Error != null || !$this->api->checkHash($response)) {
-                echo '<p class="status-message">' . __('The payment details could not be loaded. Please try reloading the page.', 'wc-gateway-premium-black') . '</p>';
+                echo '<p class="status-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'woocommerce-gateway-premium-black')) . '</p>';
 
                 return;
             }
 
             if ($response->Status === 'confirmed') {
-                echo '<p class="status-message">' . __('The order has already been paid. No further action required.', 'wc-gateway-premium-black') . "</p>";
+                echo '<p class="status-message">' . esc_html(__('The order has already been paid. No further action required.', 'woocommerce-gateway-premium-black')) . "</p>";
             } elseif ($response->Status === 'waitingforfunds') {
 
                 $currency = strtoupper($response->Currency);
@@ -366,36 +381,37 @@ function wc_gateway_premium_black_init()
                 $amount = "{$response->Amount} {$currency}";
                 $receivedAmount = "{$response->ReceivedAmount} {$currency}";
 
-                echo '<p class="status-message">' . __('Please pay the following amount to the following address, if not already happend:', 'wc-gateway-premium-black') . "</p>";
+                echo '<p class="status-message">' . esc_html(__('Please pay the following amount to the following address, if not already happend:', 'woocommerce-gateway-premium-black')). "</p>";
 
-                echo '<p class="amount">' . __('Amount:', 'wc-gateway-premium-black') . " <strong>$amount</strong></p>";
+                echo '<p class="amount">' . esc_html(__('Amount:', 'woocommerce-gateway-premium-black')) . " <strong>" . esc_html($amount) . "</strong></p>";
 
-                echo '<p class="amount-received">' . __('Amount received:', 'wc-gateway-premium-black') . " <strong>$receivedAmount</strong></p>";
+                echo '<p class="amount-received">' . esc_html(__('Amount received:', 'woocommerce-gateway-premium-black')) . " <strong>" . esc_html($receivedAmount) . "</strong></p>";
 
-                echo '<p class="blockchain">' . __('Blockchain:', 'wc-gateway-premium-black') . " <strong>via $blockchain_name ($blockchain)</strong></p>";
+                echo '<p class="blockchain">' . esc_html(__('Blockchain:', 'woocommerce-gateway-premium-black')) . " <strong>via " . esc_html($blockchain_name) . " (" . esc_html($blockchain) . ")</strong></p>";
 
                 // Neuer Hinweis zur Blockchain-spezifischen Zahlung
                 echo '<p class="blockchain-notice warning">' . sprintf(
-                    __('⚠️ Important: This payment can only be processed via the %s blockchain. Please ensure you send the payment from a %s compatible wallet.', 'wc-gateway-premium-black'),
-                    $blockchain_name,
-                    $blockchain_name
+                    /* translators: 1: Blockchain-Name, 2: Blockchain-Name */
+                    esc_html(__('⚠️ Important: This payment can only be processed via the %1$s blockchain. Please ensure you send the payment from a %2$s compatible wallet.', 'woocommerce-gateway-premium-black')),
+                    esc_html($blockchain_name),
+                    esc_html($blockchain_name)
                 ) . '</p>';
 
-                echo '<p class="address">' . __('Address:', 'wc-gateway-premium-black') . " <strong>$response->AddressToReceive</strong></p>";
+                echo '<p class="address">' . esc_html(__('Address:', 'woocommerce-gateway-premium-black')) . " <strong>" . esc_html($response->AddressToReceive) . "</strong></p>";
 
 
                 if ($this->get_option('enable_external_status_page') === 'yes') {
-                    echo '<a class="button" href="' . $response->Url . '" target="_blank">' . __('Pay now or see current status') . '</a><br /><br />';
+                    echo '<a class="button" href="' . esc_url($response->Url) . '" target="_blank">' . esc_html(__('Pay now or see current status', 'woocommerce-gateway-premium-black')) . '</a><br /><br />';
 
                 }
 
-                echo '<br/><img class="qr-code" src="' . $response->QRCode . '" /><br/>';
+                echo '<br/><img class="qr-code" src="' . esc_url($response->QRCode) . '" /><br/>';
 
-                echo '<br/><p class="hint">' . __('In most cases, payments are processed immediately. In rare cases, it may take a few hours.', 'wc-gateway-premium-black') . '</p>';
+                echo '<br/><p class="hint">' . esc_html(__('In most cases, payments are processed immediately. In rare cases, it may take a few hours.', 'woocommerce-gateway-premium-black')) . '</p>';
             } elseif ($response->Status === 'canceled') {
-                echo '<p class="status-message">' . __('The order was cancelled.', 'wc-gateway-premium-black') . "</p>";
+                echo '<p class="status-message">' . esc_html(__('The order was cancelled.', 'woocommerce-gateway-premium-black')) . "</p>";
             } elseif ($response->Status === 'timeout') {
-                echo '<p class="status-message">' . __('The execution of your payment transaction is no longer possible, because your session has expired. Please create a new order.', 'wc-gateway-premium-black') . "</p>";
+                echo '<p class="status-message">' . esc_html(__('The execution of your payment transaction is no longer possible, because your session has expired. Please create a new order.', 'woocommerce-gateway-premium-black')) . "</p>";
             }
 
             echo '</div>';
@@ -409,7 +425,7 @@ function wc_gateway_premium_black_init()
             $mailer = WC()->mailer();
             $message = $mailer->wrap_message($subject, $message);
 
-            $mailer->send($order->get_billing_email(), strip_tags($subject), $message);
+            $mailer->send($order->get_billing_email(), wp_strip_all_tags($subject), $message);
         }
 
         /**
@@ -422,16 +438,16 @@ function wc_gateway_premium_black_init()
                     $transactionId = $order->get_transaction_id();
                     $transactionKey = $order->get_meta('_transaction_key');
 
-                    echo "<p><a class='button' href='https://premium.black/status/?id=$transactionId&k=$transactionKey' target='_blank'>" . __('Pay now/See status', 'wc-gateway-premium-black') . '</a></p>';
+                    echo "<p><a class='button' href='https://premium.black/status/?id=" . esc_html($transactionId) . "&k=" . esc_html($transactionKey) . "' target='_blank'>" . esc_html(__('Pay now/See status', 'woocommerce-gateway-premium-black')) . '</a></p>';
 
                     return;
                 } else {
                     $orderUrl = $order->get_checkout_order_received_url();
 
-                    echo "<p><a class='button' href='$orderUrl'>" . __('Pay now/See status', 'wc-gateway-premium-black') . '</a></p>';
+                    echo "<p><a class='button' href='" . esc_url($orderUrl) . "'>" . esc_html(__('Pay now/See status', 'woocommerce-gateway-premium-black')) . '</a></p>';
                 }
             } elseif ($order->has_status('processing')) {
-                echo '<p>' . __('Your payment request has been approved.', 'wc-gateway-premium-black') . '</p>';
+                echo '<p>' . esc_html(__('Your payment request has been approved.', 'woocommerce-gateway-premium-black')) . '</p>';
             }
         }
     }

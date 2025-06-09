@@ -199,9 +199,9 @@ class PremiumBlackSettings {
     public function enabled_callback()
     {
         ?> <fieldset><?php $checked = (isset($this->premium_black_settings_options['enabled']) && $this->premium_black_settings_options['enabled'] === 'yes') ? 'checked' : ''; ?>
-		<label for="enabled_0-0"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-0" value="yes" <?php echo $checked; ?>> Yes</label><br>
+		<label for="enabled_0-0"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-0" value="yes" <?php echo esc_html($checked); ?>> Yes</label><br>
 		<?php $checked = (isset($this->premium_black_settings_options['enabled']) && $this->premium_black_settings_options['enabled'] === 'no') ? 'checked' : ''; ?>
-		<label for="enabled_0-1"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-1" value="no" <?php echo $checked; ?>> No</label></fieldset> <?php
+		<label for="enabled_0-1"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-1" value="no" <?php echo esc_html($checked); ?>> No</label></fieldset> <?php
     }
 
     public function title_callback()
@@ -231,9 +231,9 @@ class PremiumBlackSettings {
     public function enable_external_status_page_callback()
     {
         ?> <fieldset><?php $checked = (isset($this->premium_black_settings_options['enable_external_status_page']) && $this->premium_black_settings_options['enable_external_status_page'] === 'yes') ? 'checked' : ''; ?>
-		<label for="enable_external_status_page_0-0"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-0" value="yes" <?php echo $checked; ?>> Yes</label><br>
+		<label for="enable_external_status_page_0-0"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-0" value="yes" <?php echo esc_html($checked); ?>> Yes</label><br>
 		<?php $checked = (isset($this->premium_black_settings_options['enable_external_status_page']) && $this->premium_black_settings_options['enable_external_status_page'] === 'no') ? 'checked' : ''; ?>
-		<label for="enable_external_status_page_0-1"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-1" value="no" <?php echo $checked; ?>> No</label></fieldset> <?php
+		<label for="enable_external_status_page_0-1"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-1" value="no" <?php echo esc_html($checked); ?>> No</label></fieldset> <?php
     }
 
     public function public_key_callback()
@@ -279,7 +279,7 @@ class PremiumBlackSettings {
             echo "Error during currency retrieval<br />";
 
             if ($response->Error != null)
-                echo 'Error:' . $response->Error;
+                echo 'Error:' . esc_html( $response->Error );
             return;
 		}
 
@@ -296,14 +296,14 @@ class PremiumBlackSettings {
 
 		foreach($response->Blockchains as $blockchain) {
 			
-			printf('<h3>' . $blockchain->Name . '</h3>');
+			printf('<h3>' . esc_html($blockchain->Name) . '</h3>');
 
 			foreach($response->Currencies as $currency) {
 				if($currency->Blockchain != $blockchain->Code) {
 					continue;
 				}
 
-				printf('<input type="checkbox" name="woocommerce_premium_black_settings[currencies][' . $currency->CodeChain . ']" id="currencies_' . $currency->CodeChain . '" value="' . $currency->CodeChain . '" %s> <label for="currencies_' . $currency->CodeChain . '">' . $currency->Name . ' (' . strtoupper( $currency->Symbol) .  ')</label><br />',
+				printf('<input type="checkbox" name="woocommerce_premium_black_settings[currencies][' . esc_html($currency->CodeChain) . ']" id="currencies_' . esc_html($currency->CodeChain) . '" value="' . esc_html($currency->CodeChain) . '" %s> <label for="currencies_' . esc_html($currency->CodeChain) . '">' . esc_html($currency->Name) . ' (' . esc_html(strtoupper( $currency->Symbol)) .  ')</label><br />',
 				( isset( $selected_currencies ) && in_array($currency->CodeChain, $selected_currencies)) ? 'checked' : ''
 				);
 			}
@@ -316,9 +316,9 @@ class PremiumBlackSettings {
     public function debug_mode_callback()
     {
         ?> <fieldset><?php $checked = (isset($this->premium_black_settings_options['debug']) && $this->premium_black_settings_options['debug'] === 'yes') ? 'checked' : ''; ?>
-		<label for="debug_mode_0-0"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-0" value="yes" <?php echo $checked; ?>> Yes</label><br>
+		<label for="debug_mode_0-0"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-0" value="yes" <?php echo esc_html($checked); ?>> Yes</label><br>
 		<?php $checked = (isset($this->premium_black_settings_options['debug']) && $this->premium_black_settings_options['debug'] === 'no') ? 'checked' : ''; ?>
-		<label for="debug_mode_0-1"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-1" value="no" <?php echo $checked; ?>> No</label></fieldset> <?php
+		<label for="debug_mode_0-1"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-1" value="no" <?php echo esc_html($checked); ?>> No</label></fieldset> <?php
     }
 
 }

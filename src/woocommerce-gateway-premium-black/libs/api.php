@@ -135,41 +135,29 @@ class payAPI
 
         $jsonObject = json_encode($data);
 
-        $options = [
-            CURLOPT_HTTPHEADER => [
-                'Content-Type:application/json; charset=utf-8',
-                'Content-Length:' . strlen($jsonObject)
+        $args = [
+            'headers' => [
+                'Content-Type' => 'application/json; charset=utf-8',
             ],
+            'body' => $jsonObject,
+            'timeout' => 4,
         ];
 
-        $defaults = [
-            CURLOPT_POST => 1,
-            CURLOPT_HEADER => 0,
-            CURLOPT_URL => $url,
-            CURLOPT_FRESH_CONNECT => 1,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_FORBID_REUSE => 1,
-            CURLOPT_TIMEOUT => 4,
-            CURLOPT_POSTFIELDS => $jsonObject
-        ];
+        $response = wp_remote_post($url, $args);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt_array($ch, ($options + $defaults));
-        $response = curl_exec($ch);
-        curl_close($ch);
-		
-		if ($response === false) {
-			echo 'cURL-Fehler: ' . curl_error($ch);
-		}
-
-        if ($this->debugService) {
-            print("<br /><br />");
-
-            var_dump(json_decode($response));
+        if (is_wp_error($response)) {
+            echo 'HTTP-Fehler: ' . esc_html($response->get_error_message());
+            return null;
         }
 
-        return json_decode($response);
+        $body = wp_remote_retrieve_body($response);
+
+        if ($this->debugService) {
+            print ("<br /><br />");
+            var_dump(json_decode($body));
+        }
+
+        return json_decode($body);
     }
 
     public function hashData(?object $data): string
