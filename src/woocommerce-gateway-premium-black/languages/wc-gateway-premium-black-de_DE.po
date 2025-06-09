@@ -5,135 +5,99 @@ msgstr ""
 "Project-Id-Version: Premium Black Payment for Woocommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
 "gateway-premium-black\n"
-"POT-Creation-Date: 2021-11-23T15:02:17+00:00\n"
-"PO-Revision-Date: 2021-11-23 16:03+0100\n"
+"POT-Creation-Date: 2025-06-09 16:16:45+00:00\n"
+"PO-Revision-Date: 2025-06-09 18:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"X-Domain: wc-gateway-premium-black\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+"X-Domain: wc-gateway-premium-black\n"
 
-#. Plugin Name of the plugin
-msgid "Premium Black Payment for Woocommerce"
-msgstr "Premium Black Bezahlmethode für Woocommerce"
-
-#. Description of the plugin
-msgid "This plugin allows you to offer payments with Premium Black."
-msgstr ""
-"Dieses Plugin erlaubt dir die Verwendung von Premium Black als Bezahlmethode."
-
-#. Author URI of the plugin
-msgid "https://premium.black"
-msgstr ""
-
-#: wc-gateway-premium-black.php:141
-msgid "Offers payments with crypto via Premium Black."
-msgstr "Ermöglicht Bezahlungen mit Krypto über Premium Black."
-
-#: wc-gateway-premium-black.php:152
-msgid "Enable Premium Black Payments"
-msgstr "Premium Black Bezahlmethode aktivieren"
-
-#: wc-gateway-premium-black.php:160
-msgid "Pay with cryptocurrency"
-msgstr "Bezahlen mit Kryptowährung"
-
-#: wc-gateway-premium-black.php:167
-msgid "Choose your preferred currency:"
-msgstr "Bevorzugte Währung wählen:"
-
-#: wc-gateway-premium-black.php:177
-msgid "Enable external status page"
-msgstr "Externe Statusseite verwenden"
-
-#: wc-gateway-premium-black.php:178
-msgid ""
-"Shows button to external Premium Black status page instead of on the same "
-"page."
-msgstr ""
-"Zeigt einen Button zur externen Premium Black Statusseite an, statt dem "
-"Status auf der Bestellseite."
-
-#: wc-gateway-premium-black.php:183
-msgid "Public key"
-msgstr "Öffentlicher Schlüssel"
-
-#: wc-gateway-premium-black.php:189
-msgid "Private key"
-msgstr "Privater Schlüssel"
-
-#: wc-gateway-premium-black.php:196
-msgid "Debug transactions"
-msgstr "Debug Transaktionen"
-
-#: wc-gateway-premium-black.php:269
-msgid "Payment for order #%s insufficient"
-msgstr "Unzureichende Bezahlung für Bestellung #%s"
-
-#: wc-gateway-premium-black.php:271
-msgid "We received <strong>%s</strong> of <strong>%s</strong>."
-msgstr "<strong>%s</strong> von <strong>%s</strong> erhalten."
-
-#: wc-gateway-premium-black.php:272
-msgid "Please sent the missing amount."
-msgstr "Bitte sende den fehlenden Betrag."
-
-#: wc-gateway-premium-black.php:273
-msgid "Click here to see the payment details again."
-msgstr "Klicke hier um die Bezahlinformationen erneut zu laden."
-
-#: wc-gateway-premium-black.php:279
-msgid "Waiting for transaction confirmation of order #%s"
-msgstr "Warten auf Transaktionsbestätigung für Bestellung #%s"
-
-#: wc-gateway-premium-black.php:281
-msgid "Thank you for submitting your payment for order #%s."
-msgstr "Vielen Dank für die Übermittlung Deiner Zahlung zur Bestellung #%s."
-
-#: wc-gateway-premium-black.php:282
-msgid "Your transaction has been registered now and is being verified."
-msgstr "Deine Transaktion wurde registriert und wird nun überprüft."
-
-#: wc-gateway-premium-black.php:283
-msgid "We will notify you after the completion."
-msgstr "Wir werden Dich nach der Bestätigung benachrichtigen."
-
-#: wc-gateway-premium-black.php:289
+#: class-premium-black-rest-endpoint.php:82
 msgid "Payment was confirmed by Premium Black."
 msgstr "Bezahlung wurde von Premium Black bestätigt."
 
-#: wc-gateway-premium-black.php:293
+#: class-premium-black-rest-endpoint.php:86
 msgid "The transaction was cancelled."
 msgstr "Die Transaktion wurde abgebrochen."
 
-#: wc-gateway-premium-black.php:297
+#: class-premium-black-rest-endpoint.php:90
 msgid "The transaction timed out."
 msgstr "Die Transaktion ist abgelaufen."
 
-#: wc-gateway-premium-black.php:337
+#: class-wc-gateway-premium-black.php:108
+msgid "Offers payments with crypto via Premium Black."
+msgstr "Ermöglicht Bezahlungen mit Krypto über Premium Black."
+
+#. translators: %s: Order number
+#: class-wc-gateway-premium-black.php:151
+msgid "Payment for order #%s insufficient"
+msgstr "Unzureichende Bezahlung für Bestellung #%s"
+
+#. translators: 1: received amount, 2: expected amount
+#: class-wc-gateway-premium-black.php:156
+msgid "We received <strong>%1$s</strong> of <strong>%2$s</strong>."
+msgstr "Wir haben <strong>%s</strong> von <strong>%s</strong> erhalten."
+
+#: class-wc-gateway-premium-black.php:160
+msgid "Please sent the missing amount."
+msgstr "Bitte sende den fehlenden Betrag."
+
+#: class-wc-gateway-premium-black.php:161
+msgid "Click here to see the payment details again."
+msgstr "Klicke hier um die Bezahlinformationen erneut zu laden."
+
+#: class-wc-gateway-premium-black.php:166
+msgid "Payment insufficient - waiting for remaining balance."
+msgstr "Zahlung nicht ausreichen, warten auf den ausgleichenden Betrag."
+
+#. translators: %s: Order id
+#: class-wc-gateway-premium-black.php:177
+msgid "Waiting for transaction confirmation of order #%s"
+msgstr "Warten auf Transaktionsbestätigung für Bestellung #%s"
+
+#. translators: %s: Order id
+#: class-wc-gateway-premium-black.php:182
+msgid "Thank you for submitting your payment for order #%s."
+msgstr "Vielen Dank für die Übermittlung Deiner Zahlung zur Bestellung #%s."
+
+#: class-wc-gateway-premium-black.php:183
+msgid "Your transaction has been registered now and is being verified."
+msgstr "Deine Transaktion wurde registriert und wird nun überprüft."
+
+#: class-wc-gateway-premium-black.php:184
+msgid "We will notify you after the completion."
+msgstr "Wir werden Dich nach der Bestätigung benachrichtigen."
+
+#: class-wc-gateway-premium-black.php:189
+msgid "Payment submitted - waiting for blockchain confirmation."
+msgstr "Zahlung übermittelt – warte auf Bestätigung durch die Blockchain."
+
+#: class-wc-gateway-premium-black.php:238
 msgid "Awaiting crypto transaction"
 msgstr "Warte auf Kryptotransaktion"
 
-#: wc-gateway-premium-black.php:426 wc-gateway-premium-black.php:450
+#: class-wc-gateway-premium-black.php:346
+#: class-wc-gateway-premium-black.php:363
 msgid "The payment details could not be loaded. Please try reloading the page."
 msgstr ""
 "Die Bestelldetails konnten nicht geladen werde. Bitte lade die Seite erneut."
 
-#: wc-gateway-premium-black.php:446
+#: class-wc-gateway-premium-black.php:360
 msgid "Status"
 msgstr "Status"
 
-#: wc-gateway-premium-black.php:459
+#: class-wc-gateway-premium-black.php:369
 msgid "The order has already been paid. No further action required."
 msgstr ""
 "Die Bestellung wurde bereits bezahlt. Es sind keine weiteren Schritte "
 "notwendig."
 
-#: wc-gateway-premium-black.php:467
+#: class-wc-gateway-premium-black.php:384
 msgid ""
 "Please pay the following amount to the following address, if not already "
 "happend:"
@@ -141,19 +105,37 @@ msgstr ""
 "Bitte bezahle den folgenden Betrag auf die folgende Adresse, falls nicht "
 "bereits geschehen:"
 
-#: wc-gateway-premium-black.php:469
+#: class-wc-gateway-premium-black.php:386
 msgid "Amount:"
 msgstr "Betrag:"
 
-#: wc-gateway-premium-black.php:471
+#: class-wc-gateway-premium-black.php:388
 msgid "Amount received:"
 msgstr "Betrag erhalten:"
 
-#: wc-gateway-premium-black.php:473
+#: class-wc-gateway-premium-black.php:390
+msgid "Blockchain:"
+msgstr "Blockchain:"
+
+#. translators: 1: Blockchain-Name, 2: Blockchain-Name
+#: class-wc-gateway-premium-black.php:395
+msgid ""
+"⚠️ Important: This payment can only be processed via the %1$s blockchain. "
+"Please ensure you send the payment from a %2$s compatible wallet."
+msgstr ""
+"Wichtig: Diese Zahlung kann nur über die %1$s-Blockchain verarbeitet werden. "
+"Bitte stelle sicher, dass du die Zahlung von einer mit %2$s kompatiblen "
+"Wallet sendest."
+
+#: class-wc-gateway-premium-black.php:400
 msgid "Address:"
 msgstr "Adresse:"
 
-#: wc-gateway-premium-black.php:477
+#: class-wc-gateway-premium-black.php:404
+msgid "Pay now or see current status"
+msgstr "Jetzt bezahlen/Status anschauen"
+
+#: class-wc-gateway-premium-black.php:410
 msgid ""
 "In most cases, payments are processed immediately. In rare cases, it may "
 "take a few hours."
@@ -161,11 +143,11 @@ msgstr ""
 "In den meisten Fällen werden die Zahlungen sofort bearbeitet. In seltenen "
 "Fällen kann es einige Stunden dauern."
 
-#: wc-gateway-premium-black.php:481
+#: class-wc-gateway-premium-black.php:412
 msgid "The order was cancelled."
 msgstr "Die Bestellung wurde storniert."
 
-#: wc-gateway-premium-black.php:485
+#: class-wc-gateway-premium-black.php:414
 msgid ""
 "The execution of your payment transaction is no longer possible, because "
 "your session has expired. Please create a new order."
@@ -173,10 +155,74 @@ msgstr ""
 "Die Ausführung Deiner Bezahlung ist nicht länger möglich, da sie bereits "
 "abgelaufen ist. Bitte gib eine neue Bestellung auf."
 
-#: wc-gateway-premium-black.php:514 wc-gateway-premium-black.php:522
+#: class-wc-gateway-premium-black.php:441
+#: class-wc-gateway-premium-black.php:447
 msgid "Pay now/See status"
 msgstr "Jetzt bezahlen/Status anschauen"
 
-#: wc-gateway-premium-black.php:527
+#: class-wc-gateway-premium-black.php:450
 msgid "Your payment request has been approved."
 msgstr "Deine Bezahlung wurde bestätigt."
+
+#: onboarding.php:13 onboarding.php:14
+msgid "Premium Black Setup"
+msgstr "Premium Black Bezahlmethode aktivieren"
+
+#: premium-black-plugin.php:38
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: premium-black-plugin.php:105
+msgid ""
+"Premium Black is almost ready. To get started, fill in your API credentials "
+"to finish the installation."
+msgstr ""
+"Premium Black ist fast bereit. Um zu starten, trage deine API-Zugangsdaten "
+"ein, um die Installation abzuschließen."
+
+#: premium-black-plugin.php:107
+msgid "Finish onboarding"
+msgstr "Onboarding abschließen"
+
+#. Plugin Name of the plugin/theme
+msgid "Premium Black Payment for WooCommerce"
+msgstr "Premium Black Bezahlmethode für Woocommerce"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/PREMIUM-BLACK/woocommerce-premium-black"
+msgstr "https://github.com/PREMIUM-BLACK/woocommerce-premium-black"
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin allows you to offer crypto currency payments with Premium Black."
+msgstr ""
+"Dieses Plugin erlaubt dir die Verwendung von Premium Black als Bezahlmethode."
+
+#. Author URI of the plugin/theme
+msgid "https://premium.black"
+msgstr "https://premium.black"
+
+#~ msgid "Pay with cryptocurrency"
+#~ msgstr "Bezahlen mit Kryptowährung"
+
+#~ msgid "Choose your preferred currency:"
+#~ msgstr "Bevorzugte Währung wählen:"
+
+#~ msgid "Enable external status page"
+#~ msgstr "Externe Statusseite verwenden"
+
+#~ msgid ""
+#~ "Shows button to external Premium Black status page instead of on the same "
+#~ "page."
+#~ msgstr ""
+#~ "Zeigt einen Button zur externen Premium Black Statusseite an, statt dem "
+#~ "Status auf der Bestellseite."
+
+#~ msgid "Public key"
+#~ msgstr "Öffentlicher Schlüssel"
+
+#~ msgid "Private key"
+#~ msgstr "Privater Schlüssel"
+
+#~ msgid "Debug transactions"
+#~ msgstr "Debug Transaktionen"

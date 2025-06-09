@@ -1,161 +1,176 @@
-# Copyright (C) 2021 
-# This file is distributed under the same license as the Premium Black Payment for Woocommerce plugin.
+# Copyright (C) 2025 Premium Black Payment for WooCommerce
+# This file is distributed under the same license as the Premium Black Payment for WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Premium Black Payment for Woocommerce 1.0.0\n"
+"Project-Id-Version: Premium Black Payment for WooCommerce 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-gateway-premium-black\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2025-06-09 16:16:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-11-23T15:02:17+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.5.0\n"
-"X-Domain: wc-gateway-premium-black\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. Plugin Name of the plugin
-msgid "Premium Black Payment for Woocommerce"
-msgstr ""
-
-#. Description of the plugin
-msgid "This plugin allows you to offer payments with Premium Black."
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://premium.black"
-msgstr ""
-
-#: wc-gateway-premium-black.php:141
-msgid "Offers payments with crypto via Premium Black."
-msgstr ""
-
-#: wc-gateway-premium-black.php:152
-msgid "Enable Premium Black Payments"
-msgstr ""
-
-#: wc-gateway-premium-black.php:160
-msgid "Pay with cryptocurrency"
-msgstr ""
-
-#: wc-gateway-premium-black.php:167
-msgid "Choose your preferred currency:"
-msgstr ""
-
-#: wc-gateway-premium-black.php:177
-msgid "Enable external status page"
-msgstr ""
-
-#: wc-gateway-premium-black.php:178
-msgid "Shows button to external Premium Black status page instead of on the same page."
-msgstr ""
-
-#: wc-gateway-premium-black.php:183
-msgid "Public key"
-msgstr ""
-
-#: wc-gateway-premium-black.php:189
-msgid "Private key"
-msgstr ""
-
-#: wc-gateway-premium-black.php:196
-msgid "Debug transactions"
-msgstr ""
-
-#: wc-gateway-premium-black.php:269
-msgid "Payment for order #%s insufficient"
-msgstr ""
-
-#: wc-gateway-premium-black.php:271
-msgid "We received <strong>%s</strong> of <strong>%s</strong>."
-msgstr ""
-
-#: wc-gateway-premium-black.php:272
-msgid "Please sent the missing amount."
-msgstr ""
-
-#: wc-gateway-premium-black.php:273
-msgid "Click here to see the payment details again."
-msgstr ""
-
-#: wc-gateway-premium-black.php:279
-msgid "Waiting for transaction confirmation of order #%s"
-msgstr ""
-
-#: wc-gateway-premium-black.php:281
-msgid "Thank you for submitting your payment for order #%s."
-msgstr ""
-
-#: wc-gateway-premium-black.php:282
-msgid "Your transaction has been registered now and is being verified."
-msgstr ""
-
-#: wc-gateway-premium-black.php:283
-msgid "We will notify you after the completion."
-msgstr ""
-
-#: wc-gateway-premium-black.php:289
+#: class-premium-black-rest-endpoint.php:82
 msgid "Payment was confirmed by Premium Black."
 msgstr ""
 
-#: wc-gateway-premium-black.php:293
+#: class-premium-black-rest-endpoint.php:86
 msgid "The transaction was cancelled."
 msgstr ""
 
-#: wc-gateway-premium-black.php:297
+#: class-premium-black-rest-endpoint.php:90
 msgid "The transaction timed out."
 msgstr ""
 
-#: wc-gateway-premium-black.php:337
+#: class-wc-gateway-premium-black.php:108
+msgid "Offers payments with crypto via Premium Black."
+msgstr ""
+
+#. translators: %s: Order number
+
+#: class-wc-gateway-premium-black.php:151
+msgid "Payment for order #%s insufficient"
+msgstr ""
+
+#. translators: 1: received amount, 2: expected amount
+
+#: class-wc-gateway-premium-black.php:156
+msgid "We received <strong>%1$s</strong> of <strong>%2$s</strong>."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:160
+msgid "Please sent the missing amount."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:161
+msgid "Click here to see the payment details again."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:166
+msgid "Payment insufficient - waiting for remaining balance."
+msgstr ""
+
+#. translators: %s: Order id
+
+#: class-wc-gateway-premium-black.php:177
+msgid "Waiting for transaction confirmation of order #%s"
+msgstr ""
+
+#. translators: %s: Order id
+
+#: class-wc-gateway-premium-black.php:182
+msgid "Thank you for submitting your payment for order #%s."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:183
+msgid "Your transaction has been registered now and is being verified."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:184
+msgid "We will notify you after the completion."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:189
+msgid "Payment submitted - waiting for blockchain confirmation."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:238
 msgid "Awaiting crypto transaction"
 msgstr ""
 
-#: wc-gateway-premium-black.php:426
-#: wc-gateway-premium-black.php:450
+#: class-wc-gateway-premium-black.php:346
+#: class-wc-gateway-premium-black.php:363
 msgid "The payment details could not be loaded. Please try reloading the page."
 msgstr ""
 
-#: wc-gateway-premium-black.php:446
+#: class-wc-gateway-premium-black.php:360
 msgid "Status"
 msgstr ""
 
-#: wc-gateway-premium-black.php:459
+#: class-wc-gateway-premium-black.php:369
 msgid "The order has already been paid. No further action required."
 msgstr ""
 
-#: wc-gateway-premium-black.php:467
+#: class-wc-gateway-premium-black.php:384
 msgid "Please pay the following amount to the following address, if not already happend:"
 msgstr ""
 
-#: wc-gateway-premium-black.php:469
+#: class-wc-gateway-premium-black.php:386
 msgid "Amount:"
 msgstr ""
 
-#: wc-gateway-premium-black.php:471
+#: class-wc-gateway-premium-black.php:388
 msgid "Amount received:"
 msgstr ""
 
-#: wc-gateway-premium-black.php:473
+#: class-wc-gateway-premium-black.php:390
+msgid "Blockchain:"
+msgstr ""
+
+#. translators: 1: Blockchain-Name, 2: Blockchain-Name
+
+#: class-wc-gateway-premium-black.php:395
+msgid "⚠️ Important: This payment can only be processed via the %1$s blockchain. Please ensure you send the payment from a %2$s compatible wallet."
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:400
 msgid "Address:"
 msgstr ""
 
-#: wc-gateway-premium-black.php:477
+#: class-wc-gateway-premium-black.php:404
+msgid "Pay now or see current status"
+msgstr ""
+
+#: class-wc-gateway-premium-black.php:410
 msgid "In most cases, payments are processed immediately. In rare cases, it may take a few hours."
 msgstr ""
 
-#: wc-gateway-premium-black.php:481
+#: class-wc-gateway-premium-black.php:412
 msgid "The order was cancelled."
 msgstr ""
 
-#: wc-gateway-premium-black.php:485
+#: class-wc-gateway-premium-black.php:414
 msgid "The execution of your payment transaction is no longer possible, because your session has expired. Please create a new order."
 msgstr ""
 
-#: wc-gateway-premium-black.php:514
-#: wc-gateway-premium-black.php:522
+#: class-wc-gateway-premium-black.php:441
+#: class-wc-gateway-premium-black.php:447
 msgid "Pay now/See status"
 msgstr ""
 
-#: wc-gateway-premium-black.php:527
+#: class-wc-gateway-premium-black.php:450
 msgid "Your payment request has been approved."
+msgstr ""
+
+#: onboarding.php:13 onboarding.php:14
+msgid "Premium Black Setup"
+msgstr ""
+
+#: premium-black-plugin.php:38
+msgid "Settings"
+msgstr ""
+
+#: premium-black-plugin.php:105
+msgid "Premium Black is almost ready. To get started, fill in your API credentials to finish the installation."
+msgstr ""
+
+#: premium-black-plugin.php:107
+msgid "Finish onboarding"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Premium Black Payment for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/PREMIUM-BLACK/woocommerce-premium-black"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "This plugin allows you to offer crypto currency payments with Premium Black."
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://premium.black"
 msgstr ""
