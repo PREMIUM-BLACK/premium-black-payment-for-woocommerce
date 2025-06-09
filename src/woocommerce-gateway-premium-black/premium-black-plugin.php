@@ -23,7 +23,7 @@ if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get
 
 // Textdomain laden
 add_action('init', function() {
-    load_plugin_textdomain('wc-gateway-premium-black', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    load_plugin_textdomain('woocommerce-gateway-premium-black', false, dirname(plugin_basename(__FILE__)) . '/languages');
 });
 
 // Gateway registrieren
@@ -102,9 +102,9 @@ function premium_black_admin_notice()
     ?>
     <div class="notice notice-warning is-dismissible" style="display: flex; align-items: center; gap: 12px;">
         <img src="<?php echo esc_url($image_url); ?>" style="width:32px; height:32px;" alt="Premium Black" />
-        <?php esc_html(__('Premium Black is almost ready. To get started, fill in your API credentials to finish the installation.', 'woocommerce-gateway-premium-black')); ?>
+        <?php echo esc_html(__('Premium Black is almost ready. To get started, fill in your API credentials to finish the installation.', 'woocommerce-gateway-premium-black')); ?>
         <a href="<?php echo esc_url(admin_url('admin.php?page=premium-black-onboarding')); ?>">
-            <?php esc_html(__('Finish onboarding', 'woocommerce-gateway-premium-black')); ?>
+            <?php echo esc_html(__('Finish onboarding', 'woocommerce-gateway-premium-black')); ?>
         </a>
     </div>
     <?php

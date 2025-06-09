@@ -292,6 +292,10 @@ class PremiumBlackSettings {
 
 		$selected_currencies = isset($this->premium_black_settings_options['currencies']) ? $this->premium_black_settings_options['currencies'] : [];
 
+        if(!is_array($selected_currencies)){
+            $selected_currencies = [];
+        }
+
         printf('<h4>' . count($response->Currencies) . ' Currencies available</h4>');
 
 		foreach($response->Blockchains as $blockchain) {

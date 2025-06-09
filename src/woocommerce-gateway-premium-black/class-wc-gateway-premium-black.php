@@ -452,12 +452,3 @@ function wc_gateway_premium_black_init()
         }
     }
 }
-
-//// Optional: Singleton-Instanz bereitstellen
-//function wc_gateway_premium_black_instance() {
-//    static $instance = null;
-//    if ($instance === null) {
-//        $instance = new WC_Gateway_Premium_Black();
-//    }
-//    return $instance;
-//}
