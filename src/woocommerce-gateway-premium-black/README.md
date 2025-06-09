@@ -43,6 +43,10 @@ WooCommerce Payment Gateway for Premium Black.
 
 For questions or issues, please open an issue in the repository or send us a mail to [contact@premium.black](mailto:contact@premium.black).
 
+## More Information
+
+For more details, visit the [Premium Black website](https://premium.black).
+
 ## License
 
 [MIT License](LICENSE) or specify the appropriate license.
