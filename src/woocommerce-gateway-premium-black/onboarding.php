@@ -8,7 +8,7 @@ add_action('admin_menu', function () {
     $public_key = get_option('woocommerce_premium_black_settings')['public_key'];
     $private_key = get_option('woocommerce_premium_black_settings')['private_key'];
 
-    if (empty($public_key) || empty($private_key)) {
+    if (empty($public_key) || !empty($private_key)) {
         add_menu_page(
             __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
             __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
@@ -176,8 +176,8 @@ add_action("wp_ajax_pb_save_onboarding_data", function () {
     $options['description'] = 'Choose your preferred currency:';
     $options['instructions'] = 'Please pay the amount.';
 
-    $options['currencies'] = sanitize_text_field(wp_unslash($_POST['currencies'] ?? ''));
-
+    $options['currencies'] = $_POST['currencies'] ?? '';
+     
     update_option('woocommerce_premium_black_settings', $options, false);
 
     wp_send_json_success(['message' => 'Onboarding finished']);
