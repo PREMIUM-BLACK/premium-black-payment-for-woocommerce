@@ -1,5 +1,5 @@
 let pbCurrencies = [];
-
+let pbBlockchains = [];
 
 jQuery(document).ready(function ($) {
 
@@ -38,7 +38,8 @@ jQuery(document).ready(function ($) {
         }).done(function (response) {
             if (response.success) {
 				$("#pb-notification").fadeIn().delay(5000).fadeOut();
-				pbCurrencies = response.data.currencies;
+                pbCurrencies = response.data.currencies;
+                pbBlockchains = response.data.blockchains || [];
                 showStep(2);
 				// Nach erfolgreicher API-Key-Prüfung
 				
@@ -57,20 +58,19 @@ jQuery(document).ready(function ($) {
     $(".next-step").click(function () {
 		const currentStep = parseInt($(".pb-tab-content.active").data("step"));
 
-		if (currentStep === 2) {
-			const selectedCurrencies = $("#pb_currency_checkboxes input[type='checkbox']:checked");
-			if (selectedCurrencies.length === 0) {
-				$("#pb_step2_error").show();
-				return;
-			} else {
-				$("#pb_step2_error").hide();
-			}
-		}
-
 		showStep(currentStep + 1);
 	});
 
     $("#pb-finish").click(function () {
+
+        const selectedCurrencies = $("#pb_currency_checkboxes input[type='checkbox']:checked");
+        if (selectedCurrencies.length === 0) {
+            $("#pb_step2_error").show();
+            return;
+        } else {
+            $("#pb_step2_error").hide();
+        }
+
 
         $.post(PremiumBlackOnboarding.ajax_url, {
             action: "pb_save_onboarding_data",
@@ -98,17 +98,39 @@ function renderCurrencies($) {
         return;
     }
 
-    pbCurrencies.forEach((currency, index) => {
-        const checkboxId = `pb_currency_${index}`;
-        const checkbox = $(`
-            <div class="pb-currency-item">
-                <label for="${checkboxId}">
-                    <input type="checkbox" id="${checkboxId}" name="pb_currencies[]" value="${currency.CodeChain}">
-                    ${currency.Name} (${currency.CodeChain.toUpperCase()})
-                </label>
-            </div>
-        `);
-        container.append(checkbox);
+    if (!pbBlockchains || pbBlockchains.length === 0) {
+        container.append("<p>No blockchains available.</p>");
+        return;
+    }
+
+    pbBlockchains.forEach((blockchain) => {
+        // Überschrift für die Blockchain
+        const blockchainHeader = $(`<h4>${blockchain.Name || blockchain.name || blockchain}</h4>`);
+        container.append(blockchainHeader);
+
+        // Währungen für diese Blockchain filtern
+        const currencies = pbCurrencies.filter(
+            (currency) =>
+                currency.Blockchain === blockchain.Code
+        );
+
+        if (currencies.length === 0) {
+            container.append("<p style='margin-left:1em;'>No currencies for this blockchain.</p>");
+            return;
+        }
+
+        currencies.forEach((currency, index) => {
+            const checkboxId = `pb_currency_${blockchain.Id || blockchain.id}_${index}`;
+            const checkbox = $(`
+                <div class="pb-currency-item" style="margin-left:1em;">
+                    <label for="${checkboxId}">
+                        <input type="checkbox" id="${checkboxId}" name="pb_currencies[]" value="${currency.CodeChain}">
+                        ${currency.Name} (${currency.Symbol.toUpperCase()})
+                    </label>
+                </div>
+            `);
+            container.append(checkbox);
+        });
     });
 }
 

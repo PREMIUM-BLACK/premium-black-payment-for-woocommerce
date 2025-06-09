@@ -94,9 +94,11 @@ function premium_black_onboarding_page() {
 						<p>Please select at least one currency to proceed.</p>
 					</div>
 				</div>
+                <br /><br />
                 <button class="button prev-step">Back</button>
-                <button class="button button-primary next-step" id="pb-finish">Finish</button>
+                <button class="button button-primary" id="pb-finish">Finish</button>
             </div>
+            
             <div class="pb-tab-content" data-step="3">
                 <p>✅ Setup complete! You can now use Premium Black.</p>
                 <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=checkout&section=premium_black'); ?>" class="button button-primary">Go to Settings</a>
@@ -149,7 +151,7 @@ add_action('wp_ajax_pb_validate_keys', function () {
 
     update_option('woocommerce_premium_black_settings', $options, false);
 
-    wp_send_json_success(['message' => 'API keys are valid.']);
+    wp_send_json_success(['message' => 'API keys are valid.', 'currencies' => $response->Currencies, 'blockchains' => $response->Blockchains]);
 });
 
 

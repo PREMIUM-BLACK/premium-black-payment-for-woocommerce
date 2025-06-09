@@ -1,6 +1,5 @@
 <?php
 
-
 class PremiumBlackSettings {
 	private $premium_black_settings_options;
 
@@ -85,7 +84,7 @@ class PremiumBlackSettings {
 
         add_settings_field(
             'enable_external_status_page', // id
-            'Show Status Page', // title
+            'Show Status Page Link', // title
             array($this, 'enable_external_status_page_callback'), // callback
             'premium-black-settings-admin', // page
             'premium_black_settings_payment_section' // section
@@ -297,7 +296,7 @@ class PremiumBlackSettings {
 
 		foreach($response->Blockchains as $blockchain) {
 			
-			printf('<h3>Blockchain: ' . strtoupper($blockchain->Code) . '</h3>');
+			printf('<h3>' . $blockchain->Name . '</h3>');
 
 			foreach($response->Currencies as $currency) {
 				if($currency->Blockchain != $blockchain->Code) {
@@ -325,4 +324,3 @@ class PremiumBlackSettings {
 }
 if ( is_admin() )
 	$premium_black_settings = new PremiumBlackSettings();
-

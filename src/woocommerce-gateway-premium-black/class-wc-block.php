@@ -11,14 +11,14 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
     }
 
     public function is_active() {
-        return $this->settings['enabled'];;
+        return true;
     }
 
     public function get_payment_method_script_handles() {
 
         wp_register_script(
             'premium_black_gateway',
-            plugin_dir_url(__FILE__) . 'checkout.js',
+            plugin_dir_url(__FILE__) . 'assets/checkout.js',
             [
                 'wc-blocks-registry',
                 'wc-settings',
@@ -38,6 +38,7 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
 
     public function get_payment_method_data() {
 
+        $blockchains = $this->settings['blockchains'];
         $allCurrencies = $this->settings['all_currencies'];
         $activeCurrencies = $this->settings['currencies'];
         $filtered = [];
@@ -56,6 +57,7 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
             'description' => $this->settings['description'],
             'instructions' => $this->settings['instructions'],
             'currencies' => $filtered,
+            'blockchains' => $blockchains,
             'icon' => plugin_dir_url(__DIR__) . 'woocommerce-gateway-premium-black/assets/premiumblack.png',
             'is_configured' => $this->is_active()
         ];

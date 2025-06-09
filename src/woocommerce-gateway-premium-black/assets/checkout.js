@@ -7,6 +7,10 @@ class PremiumBlackGateway {
 
         var _set = window.wc.wcSettings.getSetting('paymentMethodData', {})
         this.settings = _set['premium_black'];
+        this.blockchainMap = {};
+        (this.settings.blockchains || []).forEach(bc => {
+            this.blockchainMap[bc.Code] = bc.Name;
+        });
         this.title = window.wp.htmlEntities.decodeEntities(this.settings.title) ||
             window.wp.i18n.__('Premium Black - pay with crypto', 'premium_black');
 
@@ -112,13 +116,21 @@ class PremiumBlackGateway {
                 value: selectedCurrency || ''
             },
                 createElement('option', { value: '' }, '-- Please choose --'),
-                Object.entries(grouped).map(([Blockchain, currencies]) =>
-                    createElement('optgroup', { label: Blockchain.toUpperCase() + ' Blockchain' },
-                        currencies.map((currency) =>
-                            createElement('option', { value: currency.CodeChain }, currency.Name + ' (' + currency.Symbol.toUpperCase() + ')')
+                Object.entries(grouped)
+                    .sort(([a], [b]) => {
+                        const nameA = plugin.blockchainMap[a] || a;
+                        const nameB = plugin.blockchainMap[b] || b;
+                        return nameA.localeCompare(nameB);
+                    })
+                    .map(([blockchainCode, currencies]) =>
+                        createElement(
+                            'optgroup',
+                            { label: (plugin.blockchainMap[blockchainCode] || blockchainCode) },
+                            currencies.map((currency) =>
+                                createElement('option', { value: currency.CodeChain }, currency.Name + ' (' + currency.Symbol.toUpperCase() + ')')
+                            )
                         )
                     )
-                )
             )
         );
     }
