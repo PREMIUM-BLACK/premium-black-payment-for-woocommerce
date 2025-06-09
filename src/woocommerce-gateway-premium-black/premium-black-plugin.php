@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Premium Black Payment for Woocommerce
+ * Plugin URI: https://github.com/PREMIUM-BLACK/woocommerce-premium-black
  * Author Name: Premium Black Ltd.
  * Author URI: https://premium.black
  * Description: This plugin allows you to offer crypto currency payments with Premium Black.
@@ -30,9 +31,11 @@ add_filter('woocommerce_payment_gateways', function($gateways) {
 });
 
 // Plugin-Links
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), function($links) {
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
     $plugin_links = [
-        '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings') . '</a>'
+        '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings') . '</a>',
+        '<a href="https://github.com/PREMIUM-BLACK/woocommerce-premium-black" target="_blank">GitHub</a>',
+        '<a href="https://premium.black" target="_blank">Website</a>',
     ];
     return array_merge($plugin_links, $links);
 });
