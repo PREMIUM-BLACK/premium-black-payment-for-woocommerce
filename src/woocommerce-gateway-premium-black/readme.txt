@@ -3,7 +3,7 @@ Contributors: premiumblack
 Tags: woocommerce, crypto, payment, gateway, cryptocurrency, blockchain
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,7 @@ Yes, all sensitive data is handled securely and API keys are never exposed to th
 For support, visit https://premium.black or the plugin's GitHub repository.
 
 == Changelog ==
-= 1.1.0 =
+= 1.1.1 =
 * Initial public release
 
 == License ==

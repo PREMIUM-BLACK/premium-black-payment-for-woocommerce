@@ -7,7 +7,7 @@
  *
  * @class       WC_Gateway_PREMIUM_BLACK
  * @extends     WC_Payment_Gateway
- * @version     1.1.0
+ * @version     1.1.1
  */
 add_action('plugins_loaded', 'wc_gateway_premium_black_init', 11);
 
