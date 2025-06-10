@@ -8,7 +8,7 @@ add_action('admin_menu', function () {
     $public_key = get_option('woocommerce_premium_black_settings')['public_key'];
     $private_key = get_option('woocommerce_premium_black_settings')['private_key'];
 
-    if (empty($public_key) || !empty($private_key)) {
+    if (empty($public_key) || empty($private_key)) {
         add_menu_page(
             __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
             __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
