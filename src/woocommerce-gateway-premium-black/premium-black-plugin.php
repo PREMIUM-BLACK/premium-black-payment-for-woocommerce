@@ -5,8 +5,8 @@
  * Author Name: Premium Black Ltd.
  * Author URI: https://premium.black
  * Description: This plugin allows you to offer crypto currency payments with Premium Black.
- * Version: 1.1.1
- * Text Domain: woocommerce-gateway-premium-black
+ * Version: 1.1.2
+ * Text Domain: premium-black-payment-for-woocommerce
  * Domain Path: /languages
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
