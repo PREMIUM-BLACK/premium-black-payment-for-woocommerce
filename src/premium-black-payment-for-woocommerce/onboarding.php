@@ -11,8 +11,8 @@ add_action('admin_menu', function () {
 
     if (empty($public_key) || empty($private_key)) {
         add_menu_page(
-            __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
-            __('Premium Black Setup', 'woocommerce-gateway-premium-black'),
+            __('Premium Black Setup', 'premium-black-payment-for-woocommerce'),
+            __('Premium Black Setup', 'premium-black-payment-for-woocommerce'),
             'manage_options',
             'premium-black-onboarding',
             'premium_black_onboarding_page',
