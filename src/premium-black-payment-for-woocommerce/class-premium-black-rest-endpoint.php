@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 add_action('rest_api_init', function() {
     register_rest_route('premium-black/v1', '/webhook', [
         'methods' => ['GET', 'POST'],
@@ -28,7 +30,7 @@ function premium_black_handle_webhook(WP_REST_Request $request)
     $transactionId = sanitize_text_field($request->get_param('tx'));
 
     // Gateway-Instanz holen
-    $gateway = function_exists('wc_gateway_premium_black_instance') ? wc_gateway_premium_black_instance() : new WC_Gateway_Premium_Black();
+    //$gateway = function_exists('wc_gateway_premium_black_instance') ? wc_gateway_premium_black_instance() : new WC_Gateway_Premium_Black();
 
     // Bestellung anhand Transaction ID finden
     $orders = wc_get_orders([
@@ -79,15 +81,15 @@ function premium_black_handle_webhook(WP_REST_Request $request)
 
         case 'confirmed':
             $order->payment_complete($transactionId);
-            $order->add_order_note(__('Payment was confirmed by Premium Black.', 'woocommerce-gateway-premium-black'));
+            $order->add_order_note(__('Payment was confirmed by Premium Black.', 'premium-black-payment-for-woocommerce'));
             break;
 
         case 'canceled':
-            $order->update_status('cancelled', __('The transaction was cancelled.', 'woocommerce-gateway-premium-black'));
+            $order->update_status('cancelled', __('The transaction was cancelled.', 'premium-black-payment-for-woocommerce'));
             break;
 
         case 'timeout':
-            $order->update_status('cancelled', __('The transaction timed out.', 'woocommerce-gateway-premium-black'));
+            $order->update_status('cancelled', __('The transaction timed out.', 'premium-black-payment-for-woocommerce'));
             break;
 
         default:

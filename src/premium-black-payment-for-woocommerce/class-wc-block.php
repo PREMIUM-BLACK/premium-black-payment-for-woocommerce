@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
 final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
@@ -58,10 +60,9 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
             'instructions' => $this->settings['instructions'],
             'currencies' => $filtered,
             'blockchains' => $blockchains,
-            'icon' => plugin_dir_url(__DIR__) . 'woocommerce-gateway-premium-black/assets/premiumblack.png',
+            'icon' => plugin_dir_url(__FILE__) . 'assets/premiumblack.png',
             'is_configured' => $this->is_active()
         ];
     }
 
 }
-?>

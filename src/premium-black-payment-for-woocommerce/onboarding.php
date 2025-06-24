@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Premium Black Onboarding Wizard
  */
@@ -176,7 +177,8 @@ add_action("wp_ajax_pb_save_onboarding_data", function () {
     $options['description'] = 'Choose your preferred currency:';
     $options['instructions'] = 'Please pay the amount.';
 
-    $options['currencies'] = $_POST['currencies'] ?? '';
+    $currencies = isset($_POST['currencies']) ? (array) $_POST['currencies'] : array();
+    $options['currencies'] = array_map('sanitize_text_field', $currencies);
      
     update_option('woocommerce_premium_black_settings', $options, false);
 

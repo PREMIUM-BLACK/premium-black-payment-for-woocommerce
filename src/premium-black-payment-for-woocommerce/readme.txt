@@ -1,6 +1,6 @@
 === Premium Black Payment for WooCommerce ===
 Contributors: premiumblack
-Tags: woocommerce, crypto, payment, gateway, cryptocurrency, blockchain
+Tags: woocommerce, crypto, payment, gateway, blockchain
 Requires at least: 5.0
 Tested up to: 6.8
 Stable tag: 1.1.2
@@ -33,6 +33,29 @@ Supported currencies depend on your Premium Black account and configuration.
 
 = Is this plugin secure? =
 Yes, all sensitive data is handled securely and API keys are never exposed to the frontend.
+
+== External services ==
+This plugin connects to the Premium Black API (https://premium.black/service/rest/Pay.svc) to process and verify cryptocurrency payments, and to transmit payment status and transaction details between your WooCommerce shop and the Premium Black platform.
+
+**What data is sent and when?**
+- When a customer selects Premium Black as payment method and places an order, the following data is sent to the Premium Black API: order amount, selected cryptocurrency, blockchain, WooCommerce order ID, customer email, and other transaction-related information required to process the payment.
+- During payment status checks (e.g. webhook callbacks), the plugin transmits the transaction ID and key to verify and update the payment status.
+
+**Why is this data sent?**
+- The data is required to create, process, and verify cryptocurrency payments, and to keep the order status in sync with the payment status on the Premium Black platform.
+
+**Where is the data sent?**
+- All data is sent securely to the Premium Black API endpoint: https://premium.black/service/rest/Pay.svc
+
+**Under which conditions?**
+- Data is only sent when a customer initiates a payment using the Premium Black gateway, or when the plugin checks or updates the payment status for an order.
+
+**Service provider:**
+- Premium Black Ltd. (https://premium.black)
+- [Terms of Service](https://premium.black/terms/)
+- [Privacy Policy](https://premium.black/privacy/)
+
+No other external services are used by this plugin.
 
 = Where can I get support? =
 For support, visit https://premium.black or the plugin's GitHub repository.

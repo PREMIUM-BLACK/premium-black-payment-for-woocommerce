@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class PremiumBlackSettings {
 	private $premium_black_settings_options;
