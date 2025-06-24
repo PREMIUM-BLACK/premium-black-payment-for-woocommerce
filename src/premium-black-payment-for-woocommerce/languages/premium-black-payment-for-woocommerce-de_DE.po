@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Premium Black Payment for Woocommerce 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
-"gateway-premium-black\n"
-"POT-Creation-Date: 2025-06-09 16:16:45+00:00\n"
-"PO-Revision-Date: 2025-06-09 18:39+0200\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/premium-black-"
+"payment-for-woocommerce\n"
+"POT-Creation-Date: 2025-06-24 14:45:01+00:00\n"
+"PO-Revision-Date: 2025-06-24 16:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,17 +15,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
-"X-Domain: wc-gateway-premium-black\n"
+"X-Domain: premium-black-payment-for-woocommerce\n"
 
-#: class-premium-black-rest-endpoint.php:82
+#: class-premium-black-rest-endpoint.php:84
 msgid "Payment was confirmed by Premium Black."
 msgstr "Bezahlung wurde von Premium Black bestätigt."
 
-#: class-premium-black-rest-endpoint.php:86
+#: class-premium-black-rest-endpoint.php:88
 msgid "The transaction was cancelled."
 msgstr "Die Transaktion wurde abgebrochen."
 
-#: class-premium-black-rest-endpoint.php:90
+#: class-premium-black-rest-endpoint.php:92
 msgid "The transaction timed out."
 msgstr "Die Transaktion ist abgelaufen."
 
@@ -164,15 +164,15 @@ msgstr "Jetzt bezahlen/Status anschauen"
 msgid "Your payment request has been approved."
 msgstr "Deine Bezahlung wurde bestätigt."
 
-#: onboarding.php:13 onboarding.php:14
+#: onboarding.php:14 onboarding.php:15
 msgid "Premium Black Setup"
 msgstr "Premium Black Bezahlmethode aktivieren"
 
-#: premium-black-plugin.php:38
+#: premium-black-payment-for-woocommerce.php:39
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: premium-black-plugin.php:105
+#: premium-black-payment-for-woocommerce.php:89
 msgid ""
 "Premium Black is almost ready. To get started, fill in your API credentials "
 "to finish the installation."
@@ -180,7 +180,7 @@ msgstr ""
 "Premium Black ist fast bereit. Um zu starten, trage deine API-Zugangsdaten "
 "ein, um die Installation abzuschließen."
 
-#: premium-black-plugin.php:107
+#: premium-black-payment-for-woocommerce.php:91
 msgid "Finish onboarding"
 msgstr "Onboarding abschließen"
 

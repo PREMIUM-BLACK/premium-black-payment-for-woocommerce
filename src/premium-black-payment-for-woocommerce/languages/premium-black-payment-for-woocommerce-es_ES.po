@@ -3,10 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Premium Black Payment for Woocommerce 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-gateway-"
-"premium-black\n"
-"POT-Creation-Date: 2025-06-09 16:16:45+00:00\n"
-"PO-Revision-Date: 2025-06-10 12:33+0200\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/premium-black-"
+"payment-for-woocommerce\n"
+"POT-Creation-Date: 2025-06-24 14:45:01+00:00\n"
+"PO-Revision-Date: 2025-06-24 16:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -15,17 +15,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
-"X-Domain: wc-gateway-premium-black\n"
+"X-Domain: premium-black-payment-for-woocommerce\n"
 
-#: class-premium-black-rest-endpoint.php:82
+#: class-premium-black-rest-endpoint.php:84
 msgid "Payment was confirmed by Premium Black."
 msgstr "El pago fue confirmado por Premium Black."
 
-#: class-premium-black-rest-endpoint.php:86
+#: class-premium-black-rest-endpoint.php:88
 msgid "The transaction was cancelled."
 msgstr "La transacción fue cancelada."
 
-#: class-premium-black-rest-endpoint.php:90
+#: class-premium-black-rest-endpoint.php:92
 msgid "The transaction timed out."
 msgstr "La transacción expiró."
 
@@ -81,9 +81,11 @@ msgstr "Pago enviado: esperando confirmación en la blockchain."
 msgid "Awaiting crypto transaction"
 msgstr "Esperando la transacción criptográfica"
 
-#: class-wc-gateway-premium-black.php:346 class-wc-gateway-premium-black.php:363
+#: class-wc-gateway-premium-black.php:346
+#: class-wc-gateway-premium-black.php:363
 msgid "The payment details could not be loaded. Please try reloading the page."
-msgstr "No se pudieron cargar los detalles del pago. Por favor recarga la página."
+msgstr ""
+"No se pudieron cargar los detalles del pago. Por favor recarga la página."
 
 #: class-wc-gateway-premium-black.php:360
 msgid "Status"
@@ -95,10 +97,11 @@ msgstr "El pedido ya ha sido pagado. No se requiere ninguna acción adicional."
 
 #: class-wc-gateway-premium-black.php:384
 msgid ""
-"Please pay the following amount to the following address, if not already happend:"
+"Please pay the following amount to the following address, if not already "
+"happend:"
 msgstr ""
-"Por favor realiza el pago del siguiente monto a la siguiente dirección, si aún "
-"no lo has hecho:"
+"Por favor realiza el pago del siguiente monto a la siguiente dirección, si "
+"aún no lo has hecho:"
 
 #: class-wc-gateway-premium-black.php:386
 msgid "Amount:"
@@ -115,11 +118,11 @@ msgstr "Blockchain:"
 #. translators: 1: Blockchain-Name, 2: Blockchain-Name
 #: class-wc-gateway-premium-black.php:395
 msgid ""
-"⚠️ Important: This payment can only be processed via the %1$s blockchain. Please "
-"ensure you send the payment from a %2$s compatible wallet."
+"⚠️ Important: This payment can only be processed via the %1$s blockchain. "
+"Please ensure you send the payment from a %2$s compatible wallet."
 msgstr ""
-"⚠️ Importante: Este pago solo se puede procesar a través de la blockchain %1$s. "
-"Asegúrate de enviar el pago desde una wallet compatible con %2$s."
+"⚠️ Importante: Este pago solo se puede procesar a través de la blockchain "
+"%1$s. Asegúrate de enviar el pago desde una wallet compatible con %2$s."
 
 #: class-wc-gateway-premium-black.php:400
 msgid "Address:"
@@ -131,11 +134,11 @@ msgstr "Pagar ahora o ver el estado actual"
 
 #: class-wc-gateway-premium-black.php:410
 msgid ""
-"In most cases, payments are processed immediately. In rare cases, it may take a "
-"few hours."
+"In most cases, payments are processed immediately. In rare cases, it may "
+"take a few hours."
 msgstr ""
-"En la mayoría de los casos los pagos se procesan de inmediato. En casos raros "
-"puede tardar unas horas."
+"En la mayoría de los casos los pagos se procesan de inmediato. En casos "
+"raros puede tardar unas horas."
 
 #: class-wc-gateway-premium-black.php:412
 msgid "The order was cancelled."
@@ -143,13 +146,14 @@ msgstr "El pedido fue cancelado."
 
 #: class-wc-gateway-premium-black.php:414
 msgid ""
-"The execution of your payment transaction is no longer possible, because your "
-"session has expired. Please create a new order."
+"The execution of your payment transaction is no longer possible, because "
+"your session has expired. Please create a new order."
 msgstr ""
 "La ejecución de tu transacción de pago ya no es posible porque tu sesión ha "
 "expirado. Por favor crea un nuevo pedido."
 
-#: class-wc-gateway-premium-black.php:441 class-wc-gateway-premium-black.php:447
+#: class-wc-gateway-premium-black.php:441
+#: class-wc-gateway-premium-black.php:447
 msgid "Pay now/See status"
 msgstr "Pagar ahora / Ver estado"
 
@@ -157,23 +161,23 @@ msgstr "Pagar ahora / Ver estado"
 msgid "Your payment request has been approved."
 msgstr "Tu solicitud de pago ha sido aprobada."
 
-#: onboarding.php:13 onboarding.php:14
+#: onboarding.php:14 onboarding.php:15
 msgid "Premium Black Setup"
 msgstr "Configuración de Premium Black"
 
-#: premium-black-plugin.php:38
+#: premium-black-payment-for-woocommerce.php:39
 msgid "Settings"
 msgstr "Ajustes"
 
-#: premium-black-plugin.php:105
+#: premium-black-payment-for-woocommerce.php:89
 msgid ""
-"Premium Black is almost ready. To get started, fill in your API credentials to "
-"finish the installation."
+"Premium Black is almost ready. To get started, fill in your API credentials "
+"to finish the installation."
 msgstr ""
-"Premium Black está casi listo. Para comenzar, completa tus credenciales API para "
-"finalizar la instalación."
+"Premium Black está casi listo. Para comenzar, completa tus credenciales API "
+"para finalizar la instalación."
 
-#: premium-black-plugin.php:107
+#: premium-black-payment-for-woocommerce.php:91
 msgid "Finish onboarding"
 msgstr "Finalizar configuración"
 
@@ -189,7 +193,8 @@ msgstr "https://github.com/PREMIUM-BLACK/woocommerce-premium-black"
 msgid ""
 "This plugin allows you to offer crypto currency payments with Premium Black."
 msgstr ""
-"Este plugin te permite ofrecer pagos con criptomonedas a través de Premium Black."
+"Este plugin te permite ofrecer pagos con criptomonedas a través de Premium "
+"Black."
 
 #. Author URI of the plugin/theme
 msgid "https://premium.black"
