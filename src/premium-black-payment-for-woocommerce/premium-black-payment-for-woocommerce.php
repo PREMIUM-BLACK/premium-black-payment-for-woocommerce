@@ -37,7 +37,7 @@ add_filter('woocommerce_payment_gateways', function($gateways) {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
     $plugin_links = [
         '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings', 'premium-black-payment-for-woocommerce') . '</a>',
-        '<a href="https://github.com/PREMIUM-BLACK/woocommerce-premium-black" target="_blank">GitHub</a>',
+        '<a href="https://github.com/PREMIUM-BLACK/premium-black-payment-for-woocommerce" target="_blank">GitHub</a>',
         '<a href="https://premium.black" target="_blank">Website</a>',
     ];
     return array_merge($plugin_links, $links);
