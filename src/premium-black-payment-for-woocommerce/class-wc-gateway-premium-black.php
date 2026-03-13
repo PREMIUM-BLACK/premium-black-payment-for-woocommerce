@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('ABSPATH'))
+    exit;
+
 /**
  * Premium Black Payment Gateway.
  *
