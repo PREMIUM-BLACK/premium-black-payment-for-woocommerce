@@ -1,18 +1,95 @@
-.wc-gateway-premium-black .blockchain-notice.warning {
-    background-color: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-left: 4px solid #f39c12;
-    color: #856404;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border-radius: 4px;
-    font-weight: 500;
+﻿/* ── Premium Black – Payment Block Styles ── */
+
+/* === Checkout: Two-Step Picker (Block & Classic) === */
+.premblpa-checkout { font-size: 14px; }
+.premblpa-checkout .premblpa-checkout-label { display: block; font-weight: 500; color: #50575e; margin: 0 0 10px; font-size: 13px; }
+
+/* Toolbar (label left, search right) */
+.premblpa-checkout .premblpa-picker-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.premblpa-checkout .premblpa-picker-toolbar .premblpa-checkout-label { margin: 0; white-space: nowrap; }
+.premblpa-checkout .premblpa-picker-search { display: flex; align-items: center; gap: 5px; border: 1px solid #dcdcde; border-radius: 6px; padding: 4px 10px; background: #fff; transition: border-color .15s, box-shadow .15s; max-width: 200px; }
+.premblpa-checkout .premblpa-picker-search:focus-within { border-color: #1e1e2f; box-shadow: 0 0 0 1px rgba(30,30,47,0.15); }
+.premblpa-checkout .premblpa-picker-search-icon { font-size: 13px; line-height: 1; flex-shrink: 0; opacity: .55; }
+.premblpa-checkout .premblpa-picker-search-input { border: none!important;box-shadow:none!important; outline: none; background: transparent; font-size: 13px; font-family: inherit; color: #1d2327; width: 100%; padding: 2px 0; }
+.premblpa-checkout .premblpa-picker-search-input::placeholder { color: #a7aaad; }
+@media (max-width: 480px) {
+  .premblpa-checkout .premblpa-picker-toolbar { flex-direction: column; align-items: flex-start; }
+  .premblpa-checkout .premblpa-picker-search { max-width: 100%; width: 100%; }
 }
 
-    /* Alternative f�r eine r�tlichere Warnung */
-    .wc-gateway-premium-black .blockchain-notice.warning.critical {
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-        border-left: 4px solid #dc3545;
-        color: #721c24;
-    }
+/* Empty state */
+.premblpa-checkout .premblpa-picker-empty { padding: 20px 16px; text-align: center; color: #8c8f94; font-size: 13px; background: #f6f7f7; border: 1px dashed #dcdcde; border-radius: 8px; }
+
+/* Picker header (back + blockchain name) */
+.premblpa-checkout .premblpa-picker-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #e4e6e9; }
+.premblpa-checkout .premblpa-picker-header-title { font-weight: 600; font-size: 15px; color: #1d2327; }
+.premblpa-checkout .premblpa-picker-back { display: inline-flex; align-items: center; gap: 4px; background: none; border: 1px solid #dcdcde; border-radius: 6px; padding: 5px 12px 5px 8px; font-size: 13px; color: #50575e; cursor: pointer; transition: border-color .15s, color .15s, background .15s; line-height: 1; }
+.premblpa-checkout .premblpa-picker-back:hover { border-color: #8c8f94; color: #1d2327; background: #f6f7f7; }
+.premblpa-checkout .premblpa-picker-back-arrow { font-size: 18px; line-height: 1; font-weight: 300; }
+
+/* Tile grid */
+.premblpa-checkout .premblpa-picker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+@media (max-width: 400px) { .premblpa-checkout .premblpa-picker-grid { grid-template-columns: 1fr 1fr; } }
+
+/* Tile base */
+.premblpa-checkout .premblpa-picker-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px 10px; border: 1px solid #dcdcde; border-radius: 8px; background: #fff; cursor: pointer; transition: border-color .15s, box-shadow .15s, background .15s; text-align: center; min-height: 64px; font-family: inherit; font-size: inherit; line-height: 1.3; }
+.premblpa-checkout .premblpa-picker-tile:hover { border-color: #8c8f94; box-shadow: 0 1px 4px rgba(0,0,0,0.06); background: #fafafa; }
+
+/* Blockchain tile */
+.premblpa-checkout .premblpa-picker-tile--bc .premblpa-picker-tile-name { font-weight: 600; font-size: 14px; color: #1d2327; }
+.premblpa-checkout .premblpa-picker-tile--bc .premblpa-picker-tile-count { font-size: 11px; color: #8c8f94; font-weight: 400; }
+
+/* Currency tile */
+.premblpa-checkout .premblpa-picker-tile--currency .premblpa-picker-tile-symbol { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%); color: #f0c674; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; flex-shrink: 0; }
+.premblpa-checkout .premblpa-picker-tile--currency .premblpa-picker-tile-name { font-size: 12px; font-weight: 500; color: #1d2327; }
+
+/* Selected currency */
+.premblpa-checkout .premblpa-picker-tile--selected { border-color: #1e1e2f; box-shadow: 0 0 0 2px rgba(30,30,47,0.15); background: #f8f8fa; }
+.premblpa-checkout .premblpa-picker-tile--selected .premblpa-picker-tile-symbol { background: linear-gradient(135deg, #f0c674 0%, #e0b65c 100%); color: #1e1e2f; }
+
+/* Selection confirmation */
+.premblpa-checkout .premblpa-picker-selection { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding: 10px 14px; background: #edfaef; border: 1px solid #b8e6c1; border-radius: 6px; font-size: 13px; font-weight: 500; color: #00612e; }
+.premblpa-checkout .premblpa-picker-selection-check { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #00a32a; color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+
+/* === Thankyou / Order-Received: Payment Details === */
+.wc-gateway-premium-black { background: #fff; border: 1px solid #dcdcde; border-radius: 8px; padding: 24px 28px; margin: 20px 0; }
+
+/* Header */
+.wc-gateway-premium-black .premblpa-pay-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #f0f0f1; }
+.wc-gateway-premium-black .premblpa-pay-header h2 { margin: 0; font-size: 16px; font-weight: 600; color: #1d2327; }
+
+/* Status badge */
+.wc-gateway-premium-black .premblpa-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; line-height: 1; }
+.wc-gateway-premium-black .premblpa-badge--success { background: #edfaef; color: #00a32a; border: 1px solid #b8e6c1; }
+.wc-gateway-premium-black .premblpa-badge--pending { background: #fff8e5; color: #996800; border: 1px solid #f0dda0; }
+.wc-gateway-premium-black .premblpa-badge--error { background: #fcf0f1; color: #cc1818; border: 1px solid #f0c1c3; }
+
+/* Status messages */
+.wc-gateway-premium-black .premblpa-pay-message { color: #646970; font-size: 14px; margin: 0 0 16px; line-height: 1.6; }
+
+/* Info grid */
+.wc-gateway-premium-black .premblpa-pay-info { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+@media (max-width: 480px) { .wc-gateway-premium-black .premblpa-pay-info { grid-template-columns: 1fr; } }
+.wc-gateway-premium-black .premblpa-pay-info-item { background: #f6f7f7; border: 1px solid #e4e6e9; border-radius: 6px; padding: 12px 16px; }
+.wc-gateway-premium-black .premblpa-pay-info-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #8c8f94; margin-bottom: 4px; }
+.wc-gateway-premium-black .premblpa-pay-info-value { font-size: 15px; font-weight: 600; color: #1d2327; word-break: break-all; }
+
+/* Address (full width) */
+.wc-gateway-premium-black .premblpa-pay-info-item--full { grid-column: 1 / -1; }
+.wc-gateway-premium-black .premblpa-pay-info-item--address .premblpa-pay-info-value { font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace; font-size: 13px; background: #fff; padding: 8px 12px; border: 1px solid #dcdcde; border-radius: 4px; margin-top: 4px; display: block; }
+
+/* Warning notice */
+.wc-gateway-premium-black .premblpa-pay-warning { display: flex; align-items: flex-start; gap: 10px; background: #fff8e5; border: 1px solid #f0dda0; border-left: 4px solid #dba617; border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #6e4e00; line-height: 1.5; }
+.wc-gateway-premium-black .premblpa-pay-warning-icon { flex-shrink: 0; font-size: 16px; line-height: 1.4; }
+
+/* QR Code */
+.wc-gateway-premium-black .premblpa-pay-qr { text-align: center; margin: 20px 0; }
+.wc-gateway-premium-black .premblpa-pay-qr img { display: inline-block; max-width: 200px; height: auto; border: 1px solid #e4e6e9; border-radius: 8px; padding: 12px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+
+/* Actions */
+.wc-gateway-premium-black .premblpa-pay-actions { margin: 20px 0 0; }
+.wc-gateway-premium-black .premblpa-pay-actions .button { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%); color: #f0c674; border: 1px solid rgba(240,198,116,0.3); border-radius: 6px; padding: 10px 22px; font-size: 13px; font-weight: 500; text-decoration: none; transition: background .15s, border-color .15s; cursor: pointer; }
+.wc-gateway-premium-black .premblpa-pay-actions .button:hover { background: linear-gradient(135deg, #2a2a40 0%, #3a3a56 100%); border-color: rgba(240,198,116,0.5); color: #f0c674; }
+
+/* Hint */
+.wc-gateway-premium-black .premblpa-pay-hint { font-size: 12px; color: #8c8f94; margin: 16px 0 0; font-style: italic; }

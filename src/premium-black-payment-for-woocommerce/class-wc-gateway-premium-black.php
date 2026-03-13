@@ -346,7 +346,10 @@ function premblpa_gateway_init()
                 $order->set_transaction_id(null);
                 $order->delete_meta_data('_transaction_key');
 
-                echo '<p class="status-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'premium-black-payment-for-woocommerce')) . '</p>';
+                echo '<div class="wc-gateway-premium-black">';
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--error">' . esc_html(__('Error', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                echo '<p class="premblpa-pay-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'premium-black-payment-for-woocommerce')) . '</p>';
+                echo '</div>';
 
                 return;
             }
@@ -360,17 +363,19 @@ function premblpa_gateway_init()
 
             echo '<div class="wc-gateway-premium-black">';
 
-            echo '<h2 class="status-heading">' . esc_html(__('Status', 'premium-black-payment-for-woocommerce')) . '</h2>';
-
             if ($response === null || $response->Error != null || !$this->api->checkHash($response)) {
-                echo '<p class="status-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'premium-black-payment-for-woocommerce')) . '</p>';
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--error">' . esc_html(__('Error', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                echo '<p class="premblpa-pay-message">' . esc_html(__('The payment details could not be loaded. Please try reloading the page.', 'premium-black-payment-for-woocommerce')) . '</p>';
+                echo '</div>';
 
                 return;
             }
 
             if ($response->Status === 'confirmed') {
-                echo '<p class="status-message">' . esc_html(__('The order has already been paid. No further action required.', 'premium-black-payment-for-woocommerce')) . "</p>";
-            } elseif ($response->Status === 'waitingforfunds') {
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--success">&#10003; ' . esc_html(__('Confirmed', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                echo '<p class="premblpa-pay-message">' . esc_html(__('The order has already been paid. No further action required.', 'premium-black-payment-for-woocommerce')) . '</p>';
+
+            } elseif ($response->Status === 'waitingforfunds' | $response->Status == 'waitingforbalance') {
 
                 $currency = strtoupper($response->Currency);
                 $blockchain = strtoupper($response->Blockchain);
@@ -384,37 +389,68 @@ function premblpa_gateway_init()
                 $amount = "{$response->Amount} {$currency}";
                 $receivedAmount = "{$response->ReceivedAmount} {$currency}";
 
-                echo '<p class="status-message">' . esc_html(__('Please pay the following amount to the following address, if not already happend:', 'premium-black-payment-for-woocommerce')). "</p>";
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--pending">&#9679; ' . esc_html(__('Waiting for payment', 'premium-black-payment-for-woocommerce')) . '</span></div>';
 
-                echo '<p class="amount">' . esc_html(__('Amount:', 'premium-black-payment-for-woocommerce')) . " <strong>" . esc_html($amount) . "</strong></p>";
+                echo '<p class="premblpa-pay-message">' . esc_html(__('Please pay the following amount to the following address, if not already happened:', 'premium-black-payment-for-woocommerce')) . '</p>';
 
-                echo '<p class="amount-received">' . esc_html(__('Amount received:', 'premium-black-payment-for-woocommerce')) . " <strong>" . esc_html($receivedAmount) . "</strong></p>";
+                // Info grid
+                echo '<div class="premblpa-pay-info">';
 
-                echo '<p class="blockchain">' . esc_html(__('Blockchain:', 'premium-black-payment-for-woocommerce')) . " <strong>via " . esc_html($blockchain_name) . " (" . esc_html($blockchain) . ")</strong></p>";
+                echo '<div class="premblpa-pay-info-item">';
+                echo '<span class="premblpa-pay-info-label">' . esc_html(__('Amount', 'premium-black-payment-for-woocommerce')) . '</span>';
+                echo '<span class="premblpa-pay-info-value">' . esc_html($amount) . '</span>';
+                echo '</div>';
 
-                // Neuer Hinweis zur Blockchain-spezifischen Zahlung
-                echo '<p class="blockchain-notice warning">' . sprintf(
+                echo '<div class="premblpa-pay-info-item">';
+                echo '<span class="premblpa-pay-info-label">' . esc_html(__('Amount received', 'premium-black-payment-for-woocommerce')) . '</span>';
+                echo '<span class="premblpa-pay-info-value">' . esc_html($receivedAmount) . '</span>';
+                echo '</div>';
+
+                echo '<div class="premblpa-pay-info-item premblpa-pay-info-item--full">';
+                echo '<span class="premblpa-pay-info-label">' . esc_html(__('Blockchain', 'premium-black-payment-for-woocommerce')) . '</span>';
+                echo '<span class="premblpa-pay-info-value">' . esc_html($blockchain_name) . ' (' . esc_html($blockchain) . ')</span>';
+                echo '</div>';
+
+                echo '<div class="premblpa-pay-info-item premblpa-pay-info-item--full premblpa-pay-info-item--address">';
+                echo '<span class="premblpa-pay-info-label">' . esc_html(__('Address', 'premium-black-payment-for-woocommerce')) . '</span>';
+                echo '<span class="premblpa-pay-info-value">' . esc_html($response->AddressToReceive) . '</span>';
+                echo '</div>';
+
+                echo '</div>';
+
+                // Warning
+                echo '<div class="premblpa-pay-warning">';
+                echo '<span class="premblpa-pay-warning-icon">&#9888;</span>';
+                echo '<span>' . sprintf(
                     /* translators: 1: Blockchain-Name, 2: Blockchain-Name */
-                    esc_html(__('⚠️ Important: This payment can only be processed via the %1$s blockchain. Please ensure you send the payment from a %2$s compatible wallet.', 'premium-black-payment-for-woocommerce')),
+                    esc_html(__('Important: This payment can only be processed via the %1$s blockchain. Please ensure you send the payment from a %2$s compatible wallet.', 'premium-black-payment-for-woocommerce')),
                     esc_html($blockchain_name),
                     esc_html($blockchain_name)
-                ) . '</p>';
+                ) . '</span>';
+                echo '</div>';
 
-                echo '<p class="address">' . esc_html(__('Address:', 'premium-black-payment-for-woocommerce')) . " <strong>" . esc_html($response->AddressToReceive) . "</strong></p>";
-
-
-                if ($this->get_option('enable_external_status_page') === 'yes') {
-                    echo '<a class="button" href="' . esc_url($response->Url) . '" target="_blank">' . esc_html(__('Pay now or see current status', 'premium-black-payment-for-woocommerce')) . '</a><br /><br />';
-
+                // QR Code
+                if (!empty($response->QRCode)) {
+                    $allowed_protocols = array_merge(wp_allowed_protocols(), array('data'));
+                    echo '<div class="premblpa-pay-qr"><img src="' . esc_url($response->QRCode, $allowed_protocols) . '" alt="QR Code" /></div>';
                 }
 
-                echo '<br/><img class="qr-code" src="' . esc_url($response->QRCode) . '" /><br/>';
+                // Actions
+                if ($this->get_option('enable_external_status_page') === 'yes') {
+                    echo '<div class="premblpa-pay-actions">';
+                    echo '<a class="button" href="' . esc_url($response->Url) . '" target="_blank">&#8599; ' . esc_html(__('Pay now or see current status', 'premium-black-payment-for-woocommerce')) . '</a>';
+                    echo '</div>';
+                }
 
-                echo '<br/><p class="hint">' . esc_html(__('In most cases, payments are processed immediately. In rare cases, it may take a few hours.', 'premium-black-payment-for-woocommerce')) . '</p>';
+                echo '<p class="premblpa-pay-hint">' . esc_html(__('In most cases, payments are processed immediately. In rare cases, it may take a few hours.', 'premium-black-payment-for-woocommerce')) . '</p>';
+
             } elseif ($response->Status === 'canceled') {
-                echo '<p class="status-message">' . esc_html(__('The order was cancelled.', 'premium-black-payment-for-woocommerce')) . "</p>";
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--error">' . esc_html(__('Cancelled', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                echo '<p class="premblpa-pay-message">' . esc_html(__('The order was cancelled.', 'premium-black-payment-for-woocommerce')) . '</p>';
+
             } elseif ($response->Status === 'timeout') {
-                echo '<p class="status-message">' . esc_html(__('The execution of your payment transaction is no longer possible, because your session has expired. Please create a new order.', 'premium-black-payment-for-woocommerce')) . "</p>";
+                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--error">' . esc_html(__('Expired', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                echo '<p class="premblpa-pay-message">' . esc_html(__('The execution of your payment transaction is no longer possible, because your session has expired. Please create a new order.', 'premium-black-payment-for-woocommerce')) . '</p>';
             }
 
             echo '</div>';

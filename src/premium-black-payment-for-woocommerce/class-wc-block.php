@@ -18,6 +18,14 @@ final class Premblpa_Gateway_Blocks extends AbstractPaymentMethodType {
 
     public function get_payment_method_script_handles() {
 
+        wp_register_style(
+            'premblpa-payment-css',
+            plugin_dir_url(__FILE__) . 'assets/payment.css',
+            array(),
+            '1.0.0'
+        );
+        wp_enqueue_style( 'premblpa-payment-css' );
+
         wp_register_script(
             'premblpa_gateway_block',
             plugin_dir_url(__FILE__) . 'assets/checkout.js',
