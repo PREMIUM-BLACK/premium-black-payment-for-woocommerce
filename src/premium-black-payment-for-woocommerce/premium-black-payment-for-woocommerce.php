@@ -23,9 +23,9 @@ if (!defined('ABSPATH')) exit;
 if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) return;
 
 // Textdomain laden
-add_action('init', function() {
-    load_plugin_textdomain('premium-black-payment-for-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages');
-});
+//add_action('init', function() {
+//    load_plugin_textdomain('premium-black-payment-for-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages');
+//});
 
 // Gateway registrieren
 add_filter('woocommerce_payment_gateways', function($gateways) {
