@@ -3,19 +3,26 @@ let premblpaBlockchains = [];
 
 jQuery(document).ready(function ($) {
 
-    function showStep(step) {
-        $(".pb-tab-nav li, .pb-tab-content").removeClass("active");
-        $(`.pb-tab-nav li[data-step="${step}"]`).addClass("active");
-        $(`.pb-tab-content[data-step="${step}"]`).addClass("active");
+	function showStep(step) {
+		$(".pb-tab-nav li, .pb-tab-content").removeClass("active completed");
+		$(`.pb-tab-nav li[data-step="${step}"]`).addClass("active");
+		$(`.pb-tab-content[data-step="${step}"]`).addClass("active");
 
-        const percent = (step / 3) * 100;
-        $(".pb-progress-bar").css("width", percent + "%");
-		
+		// Mark previous steps as completed
+		$(".pb-tab-nav li").each(function () {
+			if (parseInt($(this).data("step")) < step) {
+				$(this).addClass("completed");
+			}
+		});
+
+		const percent = (step / 3) * 100;
+		$(".pb-progress-bar").css("width", percent + "%");
+
 		if (step === 2) {
 			renderCurrencies($);
 		}
 
-    }
+	}
 
     $(".prev-step").click(function () {
         let current = parseInt($(".pb-tab-content.active").data("step"));
