@@ -67,15 +67,33 @@ class PremiumBlackSettings {
 
 			.pb-wrap .submit { margin-top: 20px; }
 			.pb-wrap .submit .button-primary { padding: 4px 24px; border-radius: 4px; }
+
+			/* Dashboard link in header */
+			.pb-header { flex-wrap: wrap; }
+			.pb-header-content { flex: 1; min-width: 200px; }
+			.pb-header .pb-dash-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(240,198,116,0.15); color: #f0c674; border: 1px solid rgba(240,198,116,0.3); padding: 8px 18px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; transition: background .15s, border-color .15s; white-space: nowrap; }
+			.pb-header .pb-dash-link:hover { background: rgba(240,198,116,0.25); border-color: rgba(240,198,116,0.5); color: #f0c674; }
+			.pb-header .pb-dash-link .dashicons { font-size: 16px; width: 16px; height: 16px; }
+
+			/* Inline dashboard link */
+			.pb-section-desc a.pb-inline-link { color: #2271b1; text-decoration: none; font-weight: 500; }
+			.pb-section-desc a.pb-inline-link:hover { text-decoration: underline; }
+
+			/* Footer dashboard link */
+			.pb-footer { margin-top: 16px; padding: 14px 20px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 8px; display: flex; align-items: center; gap: 8px; color: #646970; font-size: 13px; }
+			.pb-footer .dashicons { color: #8c8f94; font-size: 16px; width: 16px; height: 16px; }
+			.pb-footer a { color: #2271b1; text-decoration: none; font-weight: 500; }
+			.pb-footer a:hover { text-decoration: underline; }
 		</style>
 
 		<div class="wrap pb-wrap">
 			<div class="pb-header">
 				<div class="pb-icon"><span class="dashicons dashicons-money-alt"></span></div>
-				<div>
+				<div class="pb-header-content">
 					<h1>Premium Black Settings</h1>
 					<p>Configure your cryptocurrency payment gateway for WooCommerce.</p>
 				</div>
+				<a href="https://dash.premium.black" target="_blank" rel="noopener noreferrer" class="pb-dash-link"><span class="dashicons dashicons-external"></span> Merchant Dashboard</a>
 			</div>
 
 			<?php settings_errors(); ?>
@@ -87,6 +105,11 @@ class PremiumBlackSettings {
 					submit_button( 'Save Settings' );
 				?>
 			</form>
+
+			<div class="pb-footer">
+				<span class="dashicons dashicons-admin-links"></span>
+				Manage your account, transactions and API keys in the <a href="https://dash.premium.black" target="_blank" rel="noopener noreferrer">Premium Black Merchant Dashboard &rarr;</a>
+			</div>
 		</div>
 	<?php }
 
@@ -205,7 +228,7 @@ class PremiumBlackSettings {
 	}
 
 	public function api_section_callback() {
-		echo '<p class="pb-section-desc">Enter your Premium Black API credentials to connect the payment gateway.</p>';
+		echo '<p class="pb-section-desc">Enter your Premium Black API credentials to connect the payment gateway. You can find your keys in the <a href="https://dash.premium.black" target="_blank" rel="noopener noreferrer" class="pb-inline-link">Merchant Dashboard &#8599;</a>.</p>';
 	}
 
 	public function currency_section_callback() {
