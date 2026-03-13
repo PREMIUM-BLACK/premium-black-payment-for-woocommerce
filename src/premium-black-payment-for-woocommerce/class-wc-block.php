@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
-final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
+final class Premblpa_Gateway_Blocks extends AbstractPaymentMethodType {
 
     protected $name = 'premium_black';// your payment gateway name
 
@@ -19,7 +19,7 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
     public function get_payment_method_script_handles() {
 
         wp_register_script(
-            'premium_black_gateway',
+            'premblpa_gateway_block',
             plugin_dir_url(__FILE__) . 'assets/checkout.js',
             [
                 'wc-blocks-registry',
@@ -32,10 +32,10 @@ final class Premium_Black_Gateway_Blocks extends AbstractPaymentMethodType {
             '1.0'
         );
         if( function_exists( 'wp_set_script_translations' ) ) {            
-            wp_set_script_translations( 'premium_black_gateway');
-            
+            wp_set_script_translations( 'premblpa_gateway_block');
+
         }
-        return [ 'premium_black_gateway' ];
+        return [ 'premblpa_gateway_block' ];
     }
 
     public function get_payment_method_data() {

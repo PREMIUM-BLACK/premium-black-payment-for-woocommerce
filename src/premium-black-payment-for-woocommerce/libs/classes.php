@@ -1,6 +1,6 @@
 <?php
 
-class IsTransactionConfirmedRequest
+class Premblpa_IsTransactionConfirmedRequest
 {
 	public $Hash = '';
 
@@ -8,13 +8,13 @@ class IsTransactionConfirmedRequest
 	public 	$TransactionKey = '';
 }
 
-class CreateTransactionRequest
+class Premblpa_CreateTransactionRequest
 {
 	public $Hash = '';
 
 	public $Currency = '';
 
-    public $Blockchain = '';
+	public $Blockchain = '';
 
 	public $Amount = '';
 	public $PriceCurrency = '';
@@ -27,7 +27,7 @@ class CreateTransactionRequest
 	public $CustomOrderId;
 }
 
-class GetTransactionDetailsRequest
+class Premblpa_GetTransactionDetailsRequest
 {
 	public $Hash = '';
 
@@ -37,7 +37,7 @@ class GetTransactionDetailsRequest
 	public $ReturnQRCode = 'false';
 }
 
-class ReOpenTransactionRequest
+class Premblpa_ReOpenTransactionRequest
 {
 	public $Hash = '';
 
@@ -45,7 +45,7 @@ class ReOpenTransactionRequest
 	public 	$TransactionKey = '';
 }
 
-class CancelTransactionRequest
+class Premblpa_CancelTransactionRequest
 {
 	public $Hash = '';
 
@@ -54,7 +54,7 @@ class CancelTransactionRequest
 	public $ByCustomer = 'false';
 }
 
-class GetConfigurationsRequest
+class Premblpa_GetConfigurationsRequest
 {
 	public $Hash = '';
 

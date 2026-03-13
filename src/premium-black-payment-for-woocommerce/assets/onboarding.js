@@ -1,5 +1,5 @@
-let pbCurrencies = [];
-let pbBlockchains = [];
+let premblpaCurrencies = [];
+let premblpaBlockchains = [];
 
 jQuery(document).ready(function ($) {
 
@@ -30,16 +30,16 @@ jQuery(document).ready(function ($) {
         $("#pb_step1_loader").show();
         $(this).prop("disabled", true);
 
-        $.post(PremiumBlackOnboarding.ajax_url, {
-            action: "pb_validate_keys",
-            nonce: PremiumBlackOnboarding.nonce,
+        $.post(PremblpaOnboarding.ajax_url, {
+            action: "premblpa_validate_keys",
+            nonce: PremblpaOnboarding.nonce,
             public: publicKey,
             private: privateKey
         }).done(function (response) {
             if (response.success) {
 				$("#pb-notification").fadeIn().delay(5000).fadeOut();
-                pbCurrencies = response.data.currencies;
-                pbBlockchains = response.data.blockchains || [];
+                premblpaCurrencies = response.data.currencies;
+                premblpaBlockchains = response.data.blockchains || [];
                 showStep(2);
 				// Nach erfolgreicher API-Key-Prüfung
 				
@@ -72,9 +72,9 @@ jQuery(document).ready(function ($) {
         }
 
 
-        $.post(PremiumBlackOnboarding.ajax_url, {
-            action: "pb_save_onboarding_data",
-            nonce: PremiumBlackOnboarding.nonce,
+        $.post(PremblpaOnboarding.ajax_url, {
+            action: "premblpa_save_onboarding_data",
+            nonce: PremblpaOnboarding.nonce,
             public_key: $("#pb_public_key").val(),
             private_key: $("#pb_private_key").val(),
             currencies: $("#pb_currency_checkboxes input[type='checkbox']:checked").map(function () {
@@ -93,23 +93,23 @@ function renderCurrencies($) {
     const container = $("#pb_currency_checkboxes");
     container.empty();
 
-    if (!pbCurrencies || pbCurrencies.length === 0) {
+    if (!premblpaCurrencies || premblpaCurrencies.length === 0) {
         container.append("<p>No currencies available.</p>");
         return;
     }
 
-    if (!pbBlockchains || pbBlockchains.length === 0) {
+    if (!premblpaBlockchains || premblpaBlockchains.length === 0) {
         container.append("<p>No blockchains available.</p>");
         return;
     }
 
-    pbBlockchains.forEach((blockchain) => {
+    premblpaBlockchains.forEach((blockchain) => {
         // Überschrift für die Blockchain
         const blockchainHeader = $(`<h4>${blockchain.Name || blockchain.name || blockchain}</h4>`);
         container.append(blockchainHeader);
 
         // Währungen für diese Blockchain filtern
-        const currencies = pbCurrencies.filter(
+        const currencies = premblpaCurrencies.filter(
             (currency) =>
                 currency.Blockchain === blockchain.Code
         );

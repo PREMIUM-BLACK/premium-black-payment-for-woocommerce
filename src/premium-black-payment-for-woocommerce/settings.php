@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class PremiumBlackSettings {
+class Premblpa_Settings {
 	private $premium_black_settings_options;
 
 	public function __construct() {
@@ -14,7 +14,7 @@ class PremiumBlackSettings {
 			'Premium Black Settings', // page_title
 			'Premium Black', // menu_title
 			'manage_options', // capability
-			'premium_black_settings', // menu_slug
+			'premblpa_settings', // menu_slug
 			array( $this, 'premium_black_settings_create_admin_page' ) // function
 		);
 	}
@@ -84,6 +84,15 @@ class PremiumBlackSettings {
 			.pb-footer .dashicons { color: #8c8f94; font-size: 16px; width: 16px; height: 16px; }
 			.pb-footer a { color: #2271b1; text-decoration: none; font-weight: 500; }
 			.pb-footer a:hover { text-decoration: underline; }
+
+			/* Settings notices */
+			.pb-notices { margin-bottom: 16px; }
+			.pb-notices .notice { border-radius: 6px; border: 1px solid #dcdcde; margin: 8px 0; padding: 12px 18px; display: flex; align-items: center; gap: 10px; font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+			.pb-notices .notice p { margin: 0; padding: 0; }
+			.pb-notices .notice-success { background: #edfaef; border-left: 4px solid #00a32a; color: #1d2327; }
+			.pb-notices .notice-error { background: #fcf0f1; border-left: 4px solid #d63638; color: #1d2327; }
+			.pb-notices .notice-warning { background: #fff8e5; border-left: 4px solid #dba617; color: #1d2327; }
+			.pb-notices .notice-info { background: #f0f6fc; border-left: 4px solid #72aee6; color: #1d2327; }
 		</style>
 
 		<div class="wrap pb-wrap">
@@ -96,12 +105,10 @@ class PremiumBlackSettings {
 				<a href="https://dash.premium.black" target="_blank" rel="noopener noreferrer" class="pb-dash-link"><span class="dashicons dashicons-external"></span> Merchant Dashboard</a>
 			</div>
 
-			<?php settings_errors(); ?>
-
 			<form method="post" action="options.php" class="pb-form">
 				<?php
-					settings_fields( 'premium_black_settings_option_group' );
-					do_settings_sections( 'premium-black-settings-admin' );
+					settings_fields( 'premblpa_settings_option_group' );
+					do_settings_sections( 'premblpa-settings-admin' );
 					submit_button( 'Save Settings' );
 				?>
 			</form>
@@ -115,86 +122,86 @@ class PremiumBlackSettings {
 
 	public function premium_black_settings_page_init() {
 		register_setting(
-			'premium_black_settings_option_group', // option_group
+			'premblpa_settings_option_group', // option_group
 			'woocommerce_premium_black_settings', // option_name
 			array( $this, 'premium_black_settings_sanitize' ) // sanitize_callback
 		);
 
         add_settings_section(
-            'premium_black_settings_payment_section', // id
+            'premblpa_payment_section', // id
             '<span class="dashicons dashicons-cart"></span> Payment Settings', // title
             array( $this, 'payment_section_callback' ), // callback
-            'premium-black-settings-admin' // page
+            'premblpa-settings-admin' // page
         );
 
         add_settings_field(
             'enabled', // id
             'Enabled', // title
             array($this, 'enabled_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_payment_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_payment_section' // section
         );
 
         add_settings_field(
             'title', // id
             'Title', // title
             array($this, 'title_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_payment_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_payment_section' // section
         );
 
         add_settings_field(
             'description', // id
             'Description', // title
             array($this, 'description_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_payment_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_payment_section' // section
         );
 
         add_settings_field(
             'instructions', // id
             'Instructions', // title
             array($this, 'instructions_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_payment_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_payment_section' // section
         );
 
         add_settings_field(
             'enable_external_status_page', // id
             'Show Status Page Link', // title
             array($this, 'enable_external_status_page_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_payment_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_payment_section' // section
         );
 
 		add_settings_section(
-			'premium_black_settings_apisetting_section', // id
+			'premblpa_apisetting_section', // id
 			'<span class="dashicons dashicons-admin-network"></span> API Settings', // title
 			array( $this, 'api_section_callback' ), // callback
-			'premium-black-settings-admin' // page
+			'premblpa-settings-admin' // page
 		);
 
 		add_settings_field(
 			'public_key', // id
 			'Public Key', // title
 			array( $this, 'public_key_callback' ), // callback
-			'premium-black-settings-admin', // page
-			'premium_black_settings_apisetting_section' // section
+			'premblpa-settings-admin', // page
+			'premblpa_apisetting_section' // section
 		);
 
 		add_settings_field(
 			'private_key', // id
 			'Private Key', // title
 			array( $this, 'private_key_callback' ), // callback
-			'premium-black-settings-admin', // page
-			'premium_black_settings_apisetting_section' // section
+			'premblpa-settings-admin', // page
+			'premblpa_apisetting_section' // section
 		);
 
 		add_settings_section(
-			'premium_black_settings_currency_setting_section', // id
+			'premblpa_currency_section', // id
 			'<span class="dashicons dashicons-money-alt"></span> Currency Settings', // title
 			array( $this, 'currency_section_callback' ), // callback
-			'premium-black-settings-admin' // page
+			'premblpa-settings-admin' // page
 		);
 
 		
@@ -202,23 +209,23 @@ class PremiumBlackSettings {
 			'currencies', // id
 			'Available Currencies', // title
 			array( $this, 'currencies_callback' ), // callback
-			'premium-black-settings-admin', // page
-			'premium_black_settings_currency_setting_section' // section
+			'premblpa-settings-admin', // page
+			'premblpa_currency_section' // section
 		);
 
         add_settings_section(
-            'premium_black_settings_development_setting_section', // id
+            'premblpa_development_section', // id
             '<span class="dashicons dashicons-code-standards"></span> Development Settings', // title
             array( $this, 'development_section_callback' ), // callback
-            'premium-black-settings-admin' // page
+            'premblpa-settings-admin' // page
         );
 
         add_settings_field(
             'debug', // id
             'Debug Mode', // title
             array($this, 'debug_mode_callback'), // callback
-            'premium-black-settings-admin', // page
-            'premium_black_settings_development_setting_section' // section
+            'premblpa-settings-admin', // page
+            'premblpa_development_section' // section
         );
 
     }
@@ -361,11 +368,11 @@ class PremiumBlackSettings {
 		}
 
         $debug = isset($this->premium_black_settings_options['debug']) && $this->premium_black_settings_options['debug'] === 'yes';
-		$api = new payAPI($debug);
+		$api = new Premblpa_Pay_API($debug);
 		$api->setPublicKey($public);
 		$api->setPrivateKey($private);
 	
-		$cc = new GetConfigurationsRequest();
+		$cc = new Premblpa_GetConfigurationsRequest();
 
 		$response = $api->GetConfigurations($cc);
 
@@ -436,4 +443,4 @@ class PremiumBlackSettings {
 
 }
 if ( is_admin() )
-	$premium_black_settings = new PremiumBlackSettings();
+	$premblpa_settings = new Premblpa_Settings();

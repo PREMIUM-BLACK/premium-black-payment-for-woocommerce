@@ -1,8 +1,8 @@
 "use strict";
-class PremiumBlackGateway {
+class PremblpaGateway {
     constructor() {
-        if (PremiumBlackGateway.instance) {
-            return PremiumBlackGateway.instance;
+        if (PremblpaGateway.instance) {
+            return PremblpaGateway.instance;
         }
 
         var _set = window.wc.wcSettings.getSetting('paymentMethodData', {})
@@ -47,7 +47,7 @@ class PremiumBlackGateway {
 
         window.wc.wcBlocksRegistry.registerPaymentMethod(this.gateway);
 
-        PremiumBlackGateway.instance = this;
+        PremblpaGateway.instance = this;
     }
 
     // Komponente rendern
@@ -138,4 +138,4 @@ class PremiumBlackGateway {
 }
 
 // Singleton-Instanz erzeugen (nur einmal)
-new PremiumBlackGateway();
+new PremblpaGateway();

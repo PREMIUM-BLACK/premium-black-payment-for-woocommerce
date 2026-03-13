@@ -1,6 +1,6 @@
 <?php
 
-class payAPI
+class Premblpa_Pay_API
 {
     protected string $publicKey;
     protected string $privateKey;
@@ -39,7 +39,7 @@ class payAPI
         return "$this->serviceUrl/$suffix";
     }
 
-    public function IsTransactionConfirmed(IsTransactionConfirmedRequest $request): ?object
+    public function IsTransactionConfirmed(Premblpa_IsTransactionConfirmedRequest $request): ?object
     {
         $r = new stdClass();
 
@@ -51,7 +51,7 @@ class payAPI
         return $this->doPost($r, $url);
     }
 
-    public function CreateTransaction(CreateTransactionRequest $request): ?object
+    public function CreateTransaction(Premblpa_CreateTransactionRequest $request): ?object
     {
         $r = new stdClass();
 
@@ -63,7 +63,7 @@ class payAPI
         return $this->doPost($r, $url);
     }
 
-    public function GetTransactionDetails(GetTransactionDetailsRequest $request): ?object
+    public function GetTransactionDetails(Premblpa_GetTransactionDetailsRequest $request): ?object
     {
         $r = new stdClass();
 
@@ -87,7 +87,7 @@ class payAPI
         return $this->doPost($r, $url);
     }
 
-    public function ReOpenTransaction(ReOpenTransactionRequest $request): ?object
+    public function ReOpenTransaction(Premblpa_ReOpenTransactionRequest $request): ?object
     {
         $r = new stdClass();
 
@@ -99,7 +99,7 @@ class payAPI
         return $this->doPost($r, $url);
     }
 
-    public function CancelTransaction(CancelTransactionRequest $request): ?object
+    public function CancelTransaction(Premblpa_CancelTransactionRequest $request): ?object
     {
         $r = new stdClass();
 
@@ -111,7 +111,7 @@ class payAPI
         return $this->doPost($r, $url);
     }
 	
-	public function GetConfigurations(GetConfigurationsRequest $request): ?object
+	public function GetConfigurations(Premblpa_GetConfigurationsRequest $request): ?object
     {
         $r = new stdClass();
 

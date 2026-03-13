@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action('rest_api_init', function() {
     register_rest_route('premium-black/v1', '/webhook', [
         'methods' => ['GET', 'POST'],
-        'callback' => 'premium_black_handle_webhook',
+        'callback' => 'premblpa_handle_webhook',
         'permission_callback' => '__return_true',
         'args' => array(
             'action' => array(
@@ -24,7 +24,7 @@ add_action('rest_api_init', function() {
     ]);
 });
 
-function premium_black_handle_webhook(WP_REST_Request $request)
+function premblpa_handle_webhook(WP_REST_Request $request)
 {
     $status = sanitize_text_field($request->get_param('action'));
     $transactionId = sanitize_text_field($request->get_param('tx'));
@@ -45,12 +45,12 @@ function premium_black_handle_webhook(WP_REST_Request $request)
     $order = $orders[0];
 
     // Transaction Details von API abrufen
-    $request_details = new GetTransactionDetailsRequest();
+    $request_details = new Premblpa_GetTransactionDetailsRequest();
     $request_details->TransactionId = $order->get_transaction_id();
     $request_details->TransactionKey = $order->get_meta('_transaction_key');
     $request_details->ReturnQRCode = 'false';
 
-    $instance = new WC_Gateway_Premium_Black();
+    $instance = new Premblpa_WC_Gateway();
 
     $response = $instance->api->GetTransactionDetails($request_details);
 

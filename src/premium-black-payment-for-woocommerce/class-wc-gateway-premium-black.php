@@ -5,26 +5,26 @@
  *
  * Offers payments with crypto via Premium Black.
  *
- * @class       WC_Gateway_PREMIUM_BLACK
+ * @class       Premblpa_WC_Gateway
  * @extends     WC_Payment_Gateway
  * @version     1.1.1
  */
-add_action('plugins_loaded', 'wc_gateway_premium_black_init', 11);
+add_action('plugins_loaded', 'premblpa_gateway_init', 11);
 
 
-function wc_gateway_premium_black_init()
+function premblpa_gateway_init()
 {
     require 'libs/api.php';
     require 'libs/classes.php';
     require 'onboarding.php';
     require 'settings.php';
 
-    class WC_Gateway_Premium_Black extends WC_Payment_Gateway
+    class Premblpa_WC_Gateway extends WC_Payment_Gateway
     {
         public $api;
         protected array $availableCryptos;
 
-        static WC_Gateway_Premium_Black $Instance;
+        static Premblpa_WC_Gateway $Instance;
 
         /**
          * Constructor for the gateway.
@@ -52,7 +52,7 @@ function wc_gateway_premium_black_init()
             $wordpressVersion = get_bloginfo('version');
 
             // Initialize premium black api
-            $this->api = new payAPI($this->get_option('debug') === 'yes');
+            $this->api = new Premblpa_Pay_API($this->get_option('debug') === 'yes');
             $this->api->setPublicKey($this->get_option('public_key'));
             $this->api->setPrivateKey($this->get_option('private_key'));
             $this->api->setEnvironment("WordPress=$wordpressVersion,WC-Gateway-PB=$pluginVersion");
@@ -77,7 +77,7 @@ function wc_gateway_premium_black_init()
             // Nur auf relevanten Seiten laden (Checkout, Order received, etc.)
             if (is_checkout() || is_wc_endpoint_url('order-received') || is_account_page()) {
                 wp_enqueue_style(
-                    'wc-gateway-premium-black-frontend',
+                    'premblpa-frontend',
                     plugin_dir_url(__FILE__) . 'assets/payment.css',
                     array(),
                     '1.0.0' // Versionsnummer für Cache-Busting
@@ -112,7 +112,7 @@ function wc_gateway_premium_black_init()
         public function admin_options()
         {
             // Weiterleitung zur benutzerdefinierten Einstellungsseite
-            $settings_url = admin_url('admin.php?page=premium_black_settings');
+            $settings_url = admin_url('admin.php?page=premblpa_settings');
             wp_safe_redirect($settings_url);
             exit;
         }
@@ -278,7 +278,7 @@ function wc_gateway_premium_black_init()
                 throw new Exception('Blockchain not found');
             }
 
-            $request = new CreateTransactionRequest();
+            $request = new Premblpa_CreateTransactionRequest();
 
             $request->Amount = $order->get_total();
             $request->Currency = $transaction_currency;
@@ -336,7 +336,7 @@ function wc_gateway_premium_black_init()
             $transactionId = $order->get_transaction_id();
             $transactionKey = $order->get_meta('_transaction_key');
 
-            $request = new GetTransactionDetailsRequest();
+            $request = new Premblpa_GetTransactionDetailsRequest();
 
             if (!$transactionId || !$transactionKey) {
                 $order->update_status('failed', 'Missing transaction id/key');

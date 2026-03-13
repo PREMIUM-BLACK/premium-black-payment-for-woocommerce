@@ -14,8 +14,8 @@ add_action('admin_menu', function () {
             __('Premium Black Setup', 'premium-black-payment-for-woocommerce'),
             __('Premium Black Setup', 'premium-black-payment-for-woocommerce'),
             'manage_options',
-            'premium-black-onboarding',
-            'premium_black_onboarding_page',
+            'premblpa-onboarding',
+            'premblpa_onboarding_page',
             'dashicons-admin-generic',
             3
         );
@@ -23,15 +23,15 @@ add_action('admin_menu', function () {
 });
 
 add_action('admin_enqueue_scripts', function ($hook) {
-    if ($hook !== 'toplevel_page_premium-black-onboarding') {
+    if ($hook !== 'toplevel_page_premblpa-onboarding') {
         return;
     }
 
-    wp_enqueue_style('premium-black-onboarding', plugins_url('assets/onboarding.css', __FILE__));
-    wp_enqueue_script('premium-black-onboarding', plugins_url('assets/onboarding.js', __FILE__), ['jquery'], null, true);
-    wp_localize_script('premium-black-onboarding', 'PremiumBlackOnboarding', [
+    wp_enqueue_style('premblpa-onboarding-css', plugins_url('assets/onboarding.css', __FILE__));
+    wp_enqueue_script('premblpa-onboarding-js', plugins_url('assets/onboarding.js', __FILE__), ['jquery'], null, true);
+    wp_localize_script('premblpa-onboarding-js', 'PremblpaOnboarding', [
         'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('pb_onboarding_nonce')
+        'nonce' => wp_create_nonce('premblpa_onboarding_nonce')
     ]);
 });
 
@@ -39,7 +39,7 @@ add_action('admin_enqueue_scripts', function ($hook) {
 
 
 
-function premium_black_onboarding_page()
+function premblpa_onboarding_page()
 {
     $public_key = get_option('woocommerce_premium_black_settings')['public_key'];
     $private_key = get_option('woocommerce_premium_black_settings')['private_key'];
@@ -111,9 +111,9 @@ function premium_black_onboarding_page()
 }
 
 // AJAX handler to validate keys
-add_action('wp_ajax_pb_validate_keys', function () {
+add_action('wp_ajax_premblpa_validate_keys', function () {
 
-    check_ajax_referer('pb_onboarding_nonce', 'nonce');
+    check_ajax_referer('premblpa_onboarding_nonce', 'nonce');
 
     $public = sanitize_text_field(wp_unslash($_POST['public'] ?? ''));
     $private = sanitize_text_field(wp_unslash($_POST['private'] ?? ''));
@@ -123,11 +123,11 @@ add_action('wp_ajax_pb_validate_keys', function () {
     }
 
 
-    $api = new payAPI(false);
+    $api = new Premblpa_Pay_API(false);
     $api->setPublicKey($public);
     $api->setPrivateKey($private);
 
-    $cc = new GetConfigurationsRequest();
+    $cc = new Premblpa_GetConfigurationsRequest();
 
     $response = $api->GetConfigurations($cc);
 
@@ -157,9 +157,9 @@ add_action('wp_ajax_pb_validate_keys', function () {
 });
 
 
-add_action("wp_ajax_pb_save_onboarding_data", function () {
+add_action("wp_ajax_premblpa_save_onboarding_data", function () {
 
-    check_ajax_referer('pb_onboarding_nonce', 'nonce');
+    check_ajax_referer('premblpa_onboarding_nonce', 'nonce');
 
 
     $public = sanitize_text_field(wp_unslash($_POST['public_key'] ?? ''));

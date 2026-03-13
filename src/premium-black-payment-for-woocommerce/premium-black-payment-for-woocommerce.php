@@ -29,14 +29,14 @@ add_action('init', function() {
 
 // Gateway registrieren
 add_filter('woocommerce_payment_gateways', function($gateways) {
-    $gateways[] = 'WC_Gateway_Premium_Black';
+    $gateways[] = 'Premblpa_WC_Gateway';
     return $gateways;
 });
 
 // Plugin-Links
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
     $plugin_links = [
-        '<a href="' . admin_url('admin.php?page=premium_black_settings') . '">' . __('Settings', 'premium-black-payment-for-woocommerce') . '</a>',
+        '<a href="' . admin_url('admin.php?page=premblpa_settings') . '">' . __('Settings', 'premium-black-payment-for-woocommerce') . '</a>',
         '<a href="https://github.com/PREMIUM-BLACK/premium-black-payment-for-woocommerce" target="_blank">GitHub</a>',
         '<a href="https://premium.black" target="_blank">Website</a>',
     ];
@@ -69,7 +69,7 @@ function premblpa_register_order_approval_payment_method_type()
     add_action(
         'woocommerce_blocks_payment_method_type_registration',
         function (Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry) {
-            $payment_method_registry->register(new Premium_Black_Gateway_Blocks);
+            $payment_method_registry->register(new Premblpa_Gateway_Blocks);
         }
     );
 }
@@ -87,7 +87,7 @@ function premblpa_admin_notice()
     <div class="notice notice-warning is-dismissible" style="display: flex; align-items: center; gap: 12px;">
         <img src="<?php echo esc_url($image_url); ?>" style="width:32px; height:32px;" alt="Premium Black" />
         <?php echo esc_html(__('Premium Black is almost ready. To get started, fill in your API credentials to finish the installation.', 'premium-black-payment-for-woocommerce')); ?>
-        <a href="<?php echo esc_url(admin_url('admin.php?page=premium-black-onboarding')); ?>">
+        <a href="<?php echo esc_url(admin_url('admin.php?page=premblpa-onboarding')); ?>">
             <?php echo esc_html(__('Finish onboarding', 'premium-black-payment-for-woocommerce')); ?>
         </a>
     </div>
