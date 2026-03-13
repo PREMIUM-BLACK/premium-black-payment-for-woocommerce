@@ -73,9 +73,11 @@ jQuery(document).ready(function ($) {
         const selectedCurrencies = $("#pb_currency_checkboxes input[type='checkbox']:checked");
         if (selectedCurrencies.length === 0) {
             $("#pb_step2_error").show();
+            $("#pb_step2_loader").hide();
             return;
         } else {
             $("#pb_step2_error").hide();
+            $("#pb_step2_loader").show();
         }
 
 

@@ -117,6 +117,7 @@ function premblpa_onboarding_page()
                         <?php echo esc_html(__('Please select at least one currency to proceed.', 'premium-black-payment-for-woocommerce')); ?>
                     </div>
                 </div>
+                <div id="pb_step2_loader" class="pb-inline-loader" style="display:none;"><span class="spinner is-active" style="float:none;margin:0;"></span> <?php echo esc_html(__('Saving configuration...', 'premium-black-payment-for-woocommerce')); ?></div>
                 <div class="pb-step-actions">
                     <button class="button prev-step">&larr; <?php echo esc_html(__('Back', 'premium-black-payment-for-woocommerce')); ?></button>
                     <button class="button button-primary" id="pb-finish"><?php echo esc_html(__('Finish Setup', 'premium-black-payment-for-woocommerce')); ?></button>
