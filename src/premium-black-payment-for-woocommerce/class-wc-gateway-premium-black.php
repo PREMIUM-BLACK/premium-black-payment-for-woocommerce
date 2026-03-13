@@ -375,7 +375,7 @@ function premblpa_gateway_init()
                 echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--success">&#10003; ' . esc_html(__('Confirmed', 'premium-black-payment-for-woocommerce')) . '</span></div>';
                 echo '<p class="premblpa-pay-message">' . esc_html(__('The order has already been paid. No further action required.', 'premium-black-payment-for-woocommerce')) . '</p>';
 
-            } elseif ($response->Status === 'waitingforfunds' | $response->Status == 'waitingforbalance') {
+            } elseif ($response->Status === 'waitingforfunds' || $response->Status === 'waitingforbalance') {
 
                 $currency = strtoupper($response->Currency);
                 $blockchain = strtoupper($response->Blockchain);
@@ -388,10 +388,21 @@ function premblpa_gateway_init()
 
                 $amount = "{$response->Amount} {$currency}";
                 $receivedAmount = "{$response->ReceivedAmount} {$currency}";
+                $hasReceived = floatval($response->ReceivedAmount) > 0;
+                if (function_exists('bcsub')) {
+                    $remainingAmount = bcsub($response->Amount, $response->ReceivedAmount, 8);
+                } else {
+                    $remainingAmount = number_format(floatval($response->Amount) - floatval($response->ReceivedAmount), 8, '.', '');
+                }
+                $remainingFormatted = rtrim(rtrim($remainingAmount, '0'), '.') . ' ' . $currency;
 
-                echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--pending">&#9679; ' . esc_html(__('Waiting for payment', 'premium-black-payment-for-woocommerce')) . '</span></div>';
-
-                echo '<p class="premblpa-pay-message">' . esc_html(__('Please pay the following amount to the following address, if not already happened:', 'premium-black-payment-for-woocommerce')) . '</p>';
+                if ($response->Status === 'waitingforbalance') {
+                    echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--balance">&#9679; ' . esc_html(__('Waiting for balance', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                    echo '<p class="premblpa-pay-message">' . esc_html(__('We received a partial payment. Please send the remaining amount to complete your order:', 'premium-black-payment-for-woocommerce')) . '</p>';
+                } else {
+                    echo '<div class="premblpa-pay-header"><h2>' . esc_html(__('Payment', 'premium-black-payment-for-woocommerce')) . '</h2><span class="premblpa-badge premblpa-badge--pending">&#9679; ' . esc_html(__('Waiting for payment', 'premium-black-payment-for-woocommerce')) . '</span></div>';
+                    echo '<p class="premblpa-pay-message">' . esc_html(__('Please pay the following amount to the following address, if not already happened:', 'premium-black-payment-for-woocommerce')) . '</p>';
+                }
 
                 // Info grid
                 echo '<div class="premblpa-pay-info">';
@@ -401,10 +412,18 @@ function premblpa_gateway_init()
                 echo '<span class="premblpa-pay-info-value">' . esc_html($amount) . '</span>';
                 echo '</div>';
 
-                echo '<div class="premblpa-pay-info-item">';
+                $receivedClass = $hasReceived ? 'premblpa-pay-info-item premblpa-pay-info-item--received' : 'premblpa-pay-info-item';
+                echo '<div class="' . esc_attr($receivedClass) . '">';
                 echo '<span class="premblpa-pay-info-label">' . esc_html(__('Amount received', 'premium-black-payment-for-woocommerce')) . '</span>';
                 echo '<span class="premblpa-pay-info-value">' . esc_html($receivedAmount) . '</span>';
                 echo '</div>';
+
+                if ($hasReceived) {
+                    echo '<div class="premblpa-pay-info-item premblpa-pay-info-item--remaining premblpa-pay-info-item--full">';
+                    echo '<span class="premblpa-pay-info-label">' . esc_html(__('Remaining amount', 'premium-black-payment-for-woocommerce')) . '</span>';
+                    echo '<span class="premblpa-pay-info-value">' . esc_html($remainingFormatted) . '</span>';
+                    echo '</div>';
+                }
 
                 echo '<div class="premblpa-pay-info-item premblpa-pay-info-item--full">';
                 echo '<span class="premblpa-pay-info-label">' . esc_html(__('Blockchain', 'premium-black-payment-for-woocommerce')) . '</span>';
