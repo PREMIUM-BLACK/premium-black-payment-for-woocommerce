@@ -36,7 +36,7 @@ WordPress/WooCommerce plugin to accept cryptocurrency payments with [Premium Bla
 ## Configuration
 
 - Navigate to the **Premium Black** settings page in the WordPress admin
-- Enter your public and private API keys (obtainable from the [Merchant Dashboard](https://premium.black))
+- Enter your public and private API keys (obtainable from the [Merchant Dashboard](https://dash.premium.black))
 - Enable or disable the gateway, debug mode, and transaction status features via toggle controls
 - Review and manage accepted currencies grouped by blockchain
 
