@@ -105,7 +105,7 @@ function premblpa_gateway_init()
         protected function setup_properties()
         {
             $this->id = 'premium_black';
-            $this->icon = apply_filters('woocommerce_premium_black_icon', plugins_url('assets/premiumblack.png', __FILE__)); //esc_url($this->module_url) .
+            $this->icon = apply_filters('premblpa_gateway_icon', plugins_url('assets/premiumblack.png', __FILE__)); //esc_url($this->module_url) .
             $this->has_fields = false;
             $this->method_title = 'Premium Black';
             $this->method_description = __('Offers payments with crypto via Premium Black.', 'premium-black-payment-for-woocommerce');

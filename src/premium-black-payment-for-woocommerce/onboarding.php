@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 add_action('admin_menu', function () {
-    $public_key = get_option('woocommerce_premium_black_settings')['public_key'];
-    $private_key = get_option('woocommerce_premium_black_settings')['private_key'];
+    $public_key = get_option('premblpa_settings')['public_key'];
+    $private_key = get_option('premblpa_settings')['private_key'];
 
     if (empty($public_key) || empty($private_key)) {
         add_menu_page(
@@ -41,8 +41,8 @@ add_action('admin_enqueue_scripts', function ($hook) {
 
 function premblpa_onboarding_page()
 {
-    $public_key = get_option('woocommerce_premium_black_settings')['public_key'];
-    $private_key = get_option('woocommerce_premium_black_settings')['private_key'];
+    $public_key = get_option('premblpa_settings')['public_key'];
+    $private_key = get_option('premblpa_settings')['private_key'];
 
     ?>
 
@@ -183,12 +183,12 @@ add_action('wp_ajax_premblpa_validate_keys', function () {
     }
 
     //Save into settings
-    $options = get_option('woocommerce_premium_black_settings');
+    $options = get_option('premblpa_settings');
 
     $options['all_currencies'] = $response->Currencies;
     $options['blockchains'] = $response->Blockchains;
 
-    update_option('woocommerce_premium_black_settings', $options, false);
+    update_option('premblpa_settings', $options, false);
 
     wp_send_json_success(['message' => 'API keys are valid.', 'currencies' => $response->Currencies, 'blockchains' => $response->Blockchains]);
 });
@@ -203,7 +203,7 @@ add_action("wp_ajax_premblpa_save_onboarding_data", function () {
     $private = sanitize_text_field(wp_unslash($_POST['private_key'] ?? ''));
 
     //Save into settings
-    $options = get_option('woocommerce_premium_black_settings');
+    $options = get_option('premblpa_settings');
 
     $options['enabled'] = 'yes';
     $options['enable_external_status_page'] = 'yes';
@@ -217,7 +217,7 @@ add_action("wp_ajax_premblpa_save_onboarding_data", function () {
     $currencies = isset($_POST['currencies']) ? (array) $_POST['currencies'] : array();
     $options['currencies'] = array_map('sanitize_text_field', $currencies);
      
-    update_option('woocommerce_premium_black_settings', $options, false);
+    update_option('premblpa_settings', $options, false);
 
     wp_send_json_success(['message' => 'Onboarding finished']);
 

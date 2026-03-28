@@ -21,8 +21,7 @@ class Premblpa_Settings {
 	}
 
 	public function premium_black_settings_create_admin_page() {
-		$this->premium_black_settings_options = get_option( 'woocommerce_premium_black_settings' ); ?>
-
+		$this->premium_black_settings_options = get_option( 'premblpa_settings' ); ?>
 
 		<div class="wrap pb-wrap">
 			<div class="pb-header">
@@ -52,7 +51,7 @@ class Premblpa_Settings {
 	public function premium_black_settings_page_init() {
 		register_setting(
 			'premblpa_settings_option_group', // option_group
-			'woocommerce_premium_black_settings', // option_name
+			'premblpa_settings', // option_name
 			array( $this, 'premium_black_settings_sanitize' ) // sanitize_callback
 		);
 
@@ -229,16 +228,16 @@ class Premblpa_Settings {
 	{
 		?> <div class="pb-toggle">
 		<?php $checked = (isset($this->premium_black_settings_options['enabled']) && $this->premium_black_settings_options['enabled'] === 'yes') ? 'checked' : ''; ?>
-		<label for="enabled_0-0"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
+		<label for="enabled_0-0"><input type="radio" name="premblpa_settings[enabled]" id="enabled_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
 		<?php $checked = (isset($this->premium_black_settings_options['enabled']) && $this->premium_black_settings_options['enabled'] === 'no') ? 'checked' : ''; ?>
-		<label for="enabled_0-1"><input type="radio" name="woocommerce_premium_black_settings[enabled]" id="enabled_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
+		<label for="enabled_0-1"><input type="radio" name="premblpa_settings[enabled]" id="enabled_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
 		</div> <?php
 	}
 
     public function title_callback()
     {
         printf(
-            '<input class="regular-text" type="text" name="woocommerce_premium_black_settings[title]" id="title" value="%s">',
+            '<input class="regular-text" type="text" name="premblpa_settings[title]" id="title" value="%s">',
             isset($this->premium_black_settings_options['title']) ? esc_attr($this->premium_black_settings_options['title']) : ''
         );
     }
@@ -246,7 +245,7 @@ class Premblpa_Settings {
     public function description_callback()
     {
         printf(
-            '<input class="regular-text" type="text" name="woocommerce_premium_black_settings[description]" id="description" value="%s">',
+            '<input class="regular-text" type="text" name="premblpa_settings[description]" id="description" value="%s">',
             isset($this->premium_black_settings_options['description']) ? esc_attr($this->premium_black_settings_options['description']) : ''
         );
     }
@@ -254,7 +253,7 @@ class Premblpa_Settings {
     public function instructions_callback()
     {
         printf(
-            '<input class="regular-text" type="text" name="woocommerce_premium_black_settings[instructions]" id="instructions" value="%s">',
+            '<input class="regular-text" type="text" name="premblpa_settings[instructions]" id="instructions" value="%s">',
             isset($this->premium_black_settings_options['instructions']) ? esc_attr($this->premium_black_settings_options['instructions']) : ''
         );
     }
@@ -263,23 +262,23 @@ class Premblpa_Settings {
 	{
 		?> <div class="pb-toggle">
 		<?php $checked = (isset($this->premium_black_settings_options['enable_external_status_page']) && $this->premium_black_settings_options['enable_external_status_page'] === 'yes') ? 'checked' : ''; ?>
-		<label for="enable_external_status_page_0-0"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
+		<label for="enable_external_status_page_0-0"><input type="radio" name="premblpa_settings[enable_external_status_page]" id="enable_external_status_page_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
 		<?php $checked = (isset($this->premium_black_settings_options['enable_external_status_page']) && $this->premium_black_settings_options['enable_external_status_page'] === 'no') ? 'checked' : ''; ?>
-		<label for="enable_external_status_page_0-1"><input type="radio" name="woocommerce_premium_black_settings[enable_external_status_page]" id="enable_external_status_page_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
+		<label for="enable_external_status_page_0-1"><input type="radio" name="premblpa_settings[enable_external_status_page]" id="enable_external_status_page_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
 		</div> <?php
 	}
 
     public function public_key_callback()
     {
         printf(
-            '<input class="regular-text" type="text" name="woocommerce_premium_black_settings[public_key]" id="public_key" value="%s">',
+            '<input class="regular-text" type="text" name="premblpa_settings[public_key]" id="public_key" value="%s">',
             isset($this->premium_black_settings_options['public_key']) ? esc_attr($this->premium_black_settings_options['public_key']) : ''
         );
     }
 
 	public function private_key_callback() {
 		printf(
-			'<input class="regular-text" type="password" name="woocommerce_premium_black_settings[private_key]" id="private_key" value="%s">',
+			'<input class="regular-text" type="password" name="premblpa_settings[private_key]" id="private_key" value="%s">',
 			isset( $this->premium_black_settings_options['private_key'] ) ? esc_attr( $this->premium_black_settings_options['private_key']) : ''
 		);
 	}
@@ -317,12 +316,12 @@ class Premblpa_Settings {
 			return;
 		}
 
-        $options = get_option('woocommerce_premium_black_settings');
+        $options = get_option('premblpa_settings');
 
         $options['all_currencies'] = $response->Currencies;
         $options['blockchains'] = $response->Blockchains;
 
-        update_option('woocommerce_premium_black_settings', $options, false);
+        update_option('premblpa_settings', $options, false);
 
 		$selected_currencies = isset($this->premium_black_settings_options['currencies']) ? $this->premium_black_settings_options['currencies'] : [];
 
@@ -348,7 +347,7 @@ class Premblpa_Settings {
 			echo '<div class="pb-currency-grid">';
 
 			foreach($blockchain_currencies as $currency) {
-				printf('<div class="pb-currency-item"><input type="checkbox" name="woocommerce_premium_black_settings[currencies][' . esc_html($currency->CodeChain) . ']" id="currencies_' . esc_html($currency->CodeChain) . '" value="' . esc_html($currency->CodeChain) . '" %s> <label for="currencies_' . esc_html($currency->CodeChain) . '">' . esc_html($currency->Name) . ' (' . esc_html(strtoupper( $currency->Symbol)) .  ')</label></div>',
+				printf('<div class="pb-currency-item"><input type="checkbox" name="premblpa_settings[currencies][' . esc_html($currency->CodeChain) . ']" id="currencies_' . esc_html($currency->CodeChain) . '" value="' . esc_html($currency->CodeChain) . '" %s> <label for="currencies_' . esc_html($currency->CodeChain) . '">' . esc_html($currency->Name) . ' (' . esc_html(strtoupper( $currency->Symbol)) .  ')</label></div>',
 				( isset( $selected_currencies ) && in_array($currency->CodeChain, $selected_currencies)) ? 'checked' : ''
 				);
 			}
@@ -364,9 +363,9 @@ class Premblpa_Settings {
 	{
 		?> <div class="pb-toggle">
 		<?php $checked = (isset($this->premium_black_settings_options['debug']) && $this->premium_black_settings_options['debug'] === 'yes') ? 'checked' : ''; ?>
-		<label for="debug_mode_0-0"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
+		<label for="debug_mode_0-0"><input type="radio" name="premblpa_settings[debug]" id="debug_mode_0-0" value="yes" <?php echo esc_html($checked); ?>><span>Yes</span></label>
 		<?php $checked = (isset($this->premium_black_settings_options['debug']) && $this->premium_black_settings_options['debug'] === 'no') ? 'checked' : ''; ?>
-		<label for="debug_mode_0-1"><input type="radio" name="woocommerce_premium_black_settings[debug]" id="debug_mode_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
+		<label for="debug_mode_0-1"><input type="radio" name="premblpa_settings[debug]" id="debug_mode_0-1" value="no" <?php echo esc_html($checked); ?>><span>No</span></label>
 		</div> <?php
 	}
 
@@ -388,3 +387,4 @@ class Premblpa_Settings {
 }
 if ( is_admin() )
 	$premblpa_settings = new Premblpa_Settings();
+

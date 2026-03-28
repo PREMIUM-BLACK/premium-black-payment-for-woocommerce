@@ -5,7 +5,7 @@
  * Author Name: Premium Black Ltd.
  * Author URI: https://premium.black
  * Description: This plugin allows you to offer crypto currency payments with Premium Black.
- * Version: 1.1.4
+ * Version: 1.1.5
  * Text Domain: premium-black-payment-for-woocommerce
  * Domain Path: /languages
  * License: GPLv2 or later
@@ -79,7 +79,7 @@ add_action('woocommerce_blocks_loaded', 'premblpa_register_order_approval_paymen
 
 function premblpa_admin_notice()
 {
-    if (!empty(get_option('woocommerce_premium_black_settings')['public_key']) && !empty(get_option('woocommerce_premium_black_settings')['private_key'])) {
+    if (!empty(get_option('premblpa_settings')['public_key']) && !empty(get_option('premblpa_settings')['private_key'])) {
         return;
     }
     $image_url = plugins_url('assets/premiumblack.png', __FILE__);
@@ -98,6 +98,25 @@ add_action('admin_notices', 'premblpa_admin_notice');
 register_activation_hook(__FILE__, function () {
     add_option('premblpa_do_activation_redirect', true);
 });
+
+/**
+ * Migrate legacy option name to prefixed option name (one-time).
+ */
+function premblpa_migrate_legacy_options()
+{
+    if (get_option('premblpa_settings_migrated')) {
+        return;
+    }
+
+    $legacy = get_option('woocommerce_premium_black_settings');
+    if ($legacy !== false) {
+        update_option('premblpa_settings', $legacy);
+        delete_option('woocommerce_premium_black_settings');
+    }
+
+    update_option('premblpa_settings_migrated', true);
+}
+add_action('admin_init', 'premblpa_migrate_legacy_options');
 
 //add_action('admin_init', function () {
 //    if (get_option('premblpa_do_activation_redirect', false)) {

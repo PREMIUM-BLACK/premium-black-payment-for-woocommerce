@@ -9,7 +9,7 @@ final class Premblpa_Gateway_Blocks extends AbstractPaymentMethodType {
     protected $name = 'premium_black';// your payment gateway name
 
     public function initialize() {
-        $this->settings = get_option( 'woocommerce_premium_black_settings', [] );
+        $this->settings = get_option( 'premblpa_settings', [] );
     }
 
     public function is_active() {
