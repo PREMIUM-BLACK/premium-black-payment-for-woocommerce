@@ -30,6 +30,17 @@ function premblpa_gateway_init()
         static Premblpa_WC_Gateway $Instance;
 
         /**
+         * Load settings from the custom 'premblpa_settings' option
+         * instead of WooCommerce's default 'woocommerce_premium_black_settings'.
+         */
+        public function init_settings() {
+            $this->settings = get_option('premblpa_settings', []);
+            if (!is_array($this->settings)) {
+                $this->settings = [];
+            }
+        }
+
+        /**
          * Constructor for the gateway.
          */
         public function __construct()
@@ -94,7 +105,6 @@ function premblpa_gateway_init()
         {
             if ($this->get_option('enabled') != 'yes')
                 return false;
-
 
             return !empty($this->get_option('public_key')) && !empty($this->get_option('private_key'));
         }
