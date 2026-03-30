@@ -3,12 +3,15 @@ Contributors: premiumblack
 Tags: woocommerce, crypto, payment, gateway, blockchain
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cryptocurrency payments via the Premium Black platform. This plugin provides a seamless integration, allowing your customers to pay with a variety of cryptocurrencies directly at checkout.
+
+== Short Description ==
+Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cryptocurrency payments via the Premium Black platform. 
 
 == Features ==
 * Accept payments in multiple cryptocurrencies
@@ -18,7 +21,7 @@ Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cr
 * Real-time transaction confirmation and status updates
 
 == Installation ==
-1. Upload the plugin files to the `/wp-content/plugins/premium-black-plugin` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/premium-black-payment-for-woocommerce` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Go to WooCommerce > Settings > Payments and configure the "Premium Black" payment gateway.
 4. Enter your API credentials (public and private key) provided by Premium Black.
@@ -61,6 +64,9 @@ No other external services are used by this plugin.
 For support, visit https://premium.black or the plugin's GitHub repository.
 
 == Changelog ==
+= 1.1.7 =
+* Updates to checkout & payment method selection
+
 = 1.1.1 =
 * Initial public release
 
