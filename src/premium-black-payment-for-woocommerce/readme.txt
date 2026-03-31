@@ -7,11 +7,10 @@ Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
+Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cryptocurrency payments via the Premium Black platform.
+
 == Description ==
 Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cryptocurrency payments via the Premium Black platform. This plugin provides a seamless integration, allowing your customers to pay with a variety of cryptocurrencies directly at checkout.
-
-== Short Description ==
-Premium Black Payment for WooCommerce enables your WooCommerce shop to accept cryptocurrency payments via the Premium Black platform. 
 
 == Features ==
 * Accept payments in multiple cryptocurrencies
